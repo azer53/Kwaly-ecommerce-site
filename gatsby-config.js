@@ -1,8 +1,8 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    title: `E-commerce starter`,
+    description: `E-Commerce JAM starter with Gatsby as static site generator, utility based styling with Tailwind and deployment on Netlify. To be cloned to extend with API's and content management for E-commerce`,
+    author: `Eli Colpaert`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -18,7 +18,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `gatsby-starter-default`,
+        name: `E-commerce starter`,
         short_name: `starter`,
         start_url: `/`,
         background_color: `#663399`,
@@ -27,8 +27,16 @@ module.exports = {
         icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
       },
     },
+    `gatsby-plugin-postcss`,
+    {
+      resolve: `gatsby-plugin-purgecss`,
+      options: {
+        tailwind: true,
+        purgeOnly: [`src/css/style.css`]
+      }
+    },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
-    // `gatsby-plugin-offline`,
+    `gatsby-plugin-offline`,
   ],
 }
