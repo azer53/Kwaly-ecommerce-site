@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: `E-commerce starter`,
+    title: `Commerce 2020`,
     description: `E-Commerce JAM starter with Gatsby as static site generator, utility based styling with Tailwind and deployment on Netlify. To be cloned to extend with API's and content management for E-commerce`,
     author: `Eli Colpaert`,
   },
@@ -18,7 +18,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `E-commerce starter`,
+        name: `Commerce 2020`,
         short_name: `starter`,
         start_url: `/`,
         background_color: `#663399`,
