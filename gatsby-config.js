@@ -1,3 +1,7 @@
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
+
 module.exports = {
   siteMetadata: {
     title: `Commerce 2020`,
@@ -15,6 +19,7 @@ module.exports = {
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
+    `gatsby-plugin-stripe`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -26,6 +31,14 @@ module.exports = {
         display: `minimal-ui`,
         icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
       },
+    },
+    {
+      resolve: `gatsby-source-stripe`,
+      options: {
+        objects: ['Product', 'Sku', 'Subscription'],
+        secretKey: process.env.STRIPE_SECRET_KEY,
+        downloadFiles: true,
+      }
     },
     `gatsby-plugin-postcss`,
     {

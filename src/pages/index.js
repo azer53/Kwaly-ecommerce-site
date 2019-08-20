@@ -4,11 +4,13 @@ import ActionCard from "../components/actionCard"
 import PricingCard from "../components/pricingCard"
 import Hero from "../components/hero"
 import CallToAction from "../components/callToAction"
+import SEO from "../components/seo"
+
 
 
 const IndexPage = () => (
   <Layout>
-
+    <SEO title="Commerce 2020" />
     <Hero></Hero>
     <section className="bg-white border-b py-8">
 

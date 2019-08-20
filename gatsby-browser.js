@@ -7,7 +7,6 @@ exports.onInitialClientRender = () => {
         var scrollpos = window.scrollY;
         var header = document.getElementById("header");
         var navcontent = document.getElementById("nav-content");
-        var navaction = document.getElementById("navAction");
         var toToggle = document.querySelectorAll(".toggleColour");
 
         /*Apply classes for slide in bar*/
@@ -15,10 +14,6 @@ exports.onInitialClientRender = () => {
 
         if (scrollpos > 10) {
             header.classList.add("bg-white");
-            navaction.classList.remove("bg-white");
-            navaction.classList.add("gradient");
-            navaction.classList.remove("text-gray-800");
-            navaction.classList.add("text-white");
             //Use to switch toggleColour colours
             for (var i = 0; i < toToggle.length; i++) {
                 toToggle[i].classList.add("text-gray-800");
@@ -30,10 +25,6 @@ exports.onInitialClientRender = () => {
         }
         else {
             header.classList.remove("bg-white");
-            navaction.classList.remove("gradient");
-            navaction.classList.add("bg-white");
-            navaction.classList.remove("text-white");
-            navaction.classList.add("text-gray-800");
             //Use to switch toggleColour colours
             for (var j = 0; j < toToggle.length; j++) {
                 toToggle[j].classList.add("text-white");
