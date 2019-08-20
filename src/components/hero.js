@@ -1,6 +1,5 @@
 import React from "react"
-import { useStaticQuery, graphql } from "gatsby"
-import Img from "gatsby-image"
+
 import HeroImage from "./heroImage"
 
 
@@ -19,7 +18,6 @@ class Hero extends React.Component {
                             <button className="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full my-6 py-4 px-8 shadow-lg">Subscribe</button>
                         </div>
                         <div className="w-full md:w-3/5 py-6 text-center">
-                            {/* <img className="w-full md:w-4/5 z-50" src="hero.png"> */}
                             <HeroImage />
                         </div>
                     </div>
