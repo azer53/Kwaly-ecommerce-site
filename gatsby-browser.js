@@ -36,7 +36,7 @@ exports.onInitialClientRender = () => {
             navaction.classList.remove("text-white");
             navaction.classList.add("text-gray-800");
             //Use to switch toggleColour colours
-            for (var j = 0; i < toToggle.length; j++) {
+            for (var j = 0; j < toToggle.length; j++) {
                 toToggle[j].classList.add("text-white");
                 toToggle[j].classList.remove("text-gray-800");
             }
@@ -44,8 +44,7 @@ exports.onInitialClientRender = () => {
             header.classList.remove("shadow");
             navcontent.classList.remove("bg-white");
             navcontent.classList.add("bg-gray-100");
-
-        }
+        };
     });
 
 
