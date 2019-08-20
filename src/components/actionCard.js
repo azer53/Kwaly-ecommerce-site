@@ -1,13 +1,8 @@
 
-import { Link } from "gatsby"
-import PropTypes from "prop-types"
 import React from "react"
 
 class ActionCard extends React.Component {
     render() {
-        const bgImage = {
-            backgroundImage: "url('https://tailwindcss.com/img/card-left.jpg')"
-        };
         return (
             <>
                 <div className="w-full md:w-1/3 p-6 flex flex-col flex-grow flex-shrink">
