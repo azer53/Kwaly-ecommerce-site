@@ -28,7 +28,7 @@ const Layout = ({ children }) => {
   
 
   return (
-    <div className="leading-normal tracking-normal text-white gradient">
+    <div className="leading-normal tracking-normal">
       <Navigation siteTitle={data.site.siteMetadata.title} />
       <main>{children}</main>
       <Footer siteTitle={data.site.siteMetadata.title} />

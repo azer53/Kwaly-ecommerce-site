@@ -61,6 +61,33 @@
   * @import "utilities/skew-transforms";
   */
 
-  .gradient {
-    background: linear-gradient(90deg, #d53369 0%, #daae51 100%);
+@import url('https://fonts.googleapis.com/css?family=Karla&display=swap');
+
+.text-karla-uppercase{
+  font-family: 'Karla';
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
+
+.opacity-grey-300{
+  background-color: rgba(211, 211, 211, 0.7);
+    -webkit-transition: background-color .5s ease-out;
+  -moz-transition: background-color .5s ease-out;
+  -o-transition: background-color .5s ease-out;
+  transition: background-color .5s ease-out;
+}
+.opacity-grey-300:hover{
+  background-color: rgba(211, 211, 230, 1);
+  }
+
+.big-shadow{
+  box-shadow: 0 13px 27px -5px rgba(50,50,93,.25), 0 8px 16px -8px rgba(0,0,0,.3), 0 -6px 16px -6px rgba(0,0,0,.025);
+}
+
+.flex-fix{
+  min-width: 0;
+  width: 100%;
+}
+  /*.gradient {
+    background: linear-gradient(90deg, #d53369 0%, #daae51 100%);
+}*/

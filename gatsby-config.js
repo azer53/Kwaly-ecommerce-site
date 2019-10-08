@@ -17,8 +17,19 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
+        {
+      resolve: 'gatsby-background-image',
+      options: {
+        // add your own characters to escape, replacing the default ':/'
+        specialChars: '/:',
+      },
+    },{
+      resolve:`gatsby-plugin-sharp`,
+      options: {
+      defaultQuality: 90,
+    },
+    },
     `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,
     `gatsby-plugin-stripe`,
     {
       resolve: `gatsby-plugin-manifest`,
