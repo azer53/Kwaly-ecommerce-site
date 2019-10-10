@@ -3,7 +3,7 @@ import Layout from "../components/layout"
 
 
 import SEO from "../components/seo"
-import Products from "../components/stripe/products"
+import Products from "../components/contentful/products"
 
 
 
@@ -16,9 +16,6 @@ const ShopPage = () => (
 
         <h1 className="w-full my-2 text-5xl font-bold leading-tight text-center text-gray-800 text-karla-uppercase">PRODUCTS</h1>
 
-        <div className="w-full mb-4">
-          <div className="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
-        </div>
 
         <Products />
 
