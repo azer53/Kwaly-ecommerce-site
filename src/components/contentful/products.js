@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { graphql, StaticQuery } from 'gatsby'
 import SkuCard from './skuCard'
-import Img from "gatsby-image"
+
 
 
 class Skus extends Component {
@@ -29,19 +29,17 @@ class Skus extends Component {
                                         gender
                                         price
                                         size
-                                        typeOfClothes
+                                        slug
                                         stock
-                                        entry
-                                        stripeSku
                                         displayName
-                                        description {
-                                        description
-                                        }
                                         productImages {
                                         fluid(maxWidth: 300) {
                                             ...GatsbyContentfulFluid
                                             }
                                         }
+                                        clothingType {
+                                            type
+                                          }
                                     }
                                     }
                                 }
@@ -56,7 +54,7 @@ class Skus extends Component {
                             ))}
                         </div>
                     )}
-                />
+            />
         )
     }
 }
