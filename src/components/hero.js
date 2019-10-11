@@ -1,7 +1,7 @@
 import React from "react"
 
 import { Link } from "gatsby"
-import HeroImage from "./images/HeroImage"
+import HeroImage from "./images/heroImage"
 
 class Hero extends React.Component {
     render() {
