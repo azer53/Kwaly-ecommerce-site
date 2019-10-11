@@ -8,6 +8,7 @@ import SEO from "../components/seo"
 import BlackShirt from "../components/images/black-shirt.js"
 import PinkShirt from "../components/images/pink-shirt.js"
 import InstaFeed from "../components/instaFeed.js"
+import { Link } from "gatsby"
 
 class IndexPage extends React.Component {
 
@@ -40,23 +41,27 @@ class IndexPage extends React.Component {
       <Layout>
         <SEO title="KWALY - ORGANIC RECYCLED CLOTHING" />
         <Hero></Hero>
-        <section className="bg-white py-8">
+        <section className="bg-white py-8 my-8">
 
           <div className="lg:w-5/12 mx-auto">
 
             <div className="mx-auto text-center text-karla-uppercase text-2xl">
               <h2 className="mb-8">
                 EMBROIDERED SERIES
-       </h2>
-              <div className="flex justify-center">
+              </h2>
+              <div className="flex justify-center shadow-xl p-4">
                 <div className="flex-1 px-8">
                   <PinkShirt />
                 </div>
                 <div className="flex-1 px-8">
                   <BlackShirt />
                 </div>
+              </div>
+              <div>
 
-
+                <button className="text-karla-uppercase bg-gray-300 p-4 text-lg shadow-lg -mt-4">
+                  <Link to="./shop">Find out more!</Link>
+                </button>
               </div>
             </div>
           </div>
@@ -66,6 +71,7 @@ class IndexPage extends React.Component {
           <div className="lg:w-10/12 mx-auto">
 
             <InstaFeed edges={this.state.result.graphql.user.edge_owner_to_timeline_media.edges} />
+
           </div>
 
 
