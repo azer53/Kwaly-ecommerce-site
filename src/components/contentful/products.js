@@ -28,12 +28,10 @@ class Skus extends Component {
                                         color
                                         gender
                                         price
-                                        size
                                         slug
-                                        stock
                                         displayName
                                         productImages {
-                                        fluid(maxWidth: 300) {
+                                        fluid(maxWidth: 600) {
                                             ...GatsbyContentfulFluid
                                             }
                                         }

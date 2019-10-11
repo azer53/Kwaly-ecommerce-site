@@ -36,7 +36,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     result.data.allContentfulClothes.edges.forEach(({ node }) => {
       const productSlug = node.slug
       createPage({
-        path: 'products/'+productSlug,
+        path: 'shop/'+productSlug,
         component: productTemplate,
         // In your blog post template's graphql query, you can use path
         // as a GraphQL variable to query for data from the markdown file.

@@ -34,7 +34,7 @@ const SkuCard = class extends React.Component {
         return (
 
                 <div className="w-10/12 md:w-1/3 p-8 mx-auto sm:mx-2 flex flex-col flex-grow flex-shrink shadow-lg">
-                    <Link to={"products/"+sku.slug}>
+                    <Link to={"shop/"+sku.slug}>
                     <div className="">
                         {  sku.productImages ?
                                 <Img fluid={sku.productImages[0].fluid} placeholderClassName="" />
