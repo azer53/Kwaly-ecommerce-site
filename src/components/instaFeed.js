@@ -19,11 +19,14 @@ class InstaFeed extends React.Component {
             const edges = props.edges.slice(0, 5);
             const instaItems = edges.map((edge, index) =>
                 <div className="flex-initial px-2 w-1/5">
-
-
-                    <a href={"https://www.instagram.com/p/" + edge.node.shortcode} target="_blank">
+                    <div className="instaContainer">
                         <InstaItem key={index} src={edge.node.thumbnail_resources[2].src} />
-                    </a>
+                        <a href={"https://www.instagram.com/p/" + edge.node.shortcode} target="_blank">
+                            <div className="overlay">
+                                <span className="text-sm text-karla-uppercase text-center instaText">see post on instagram</span>
+                            </div>
+                        </a>
+                    </div>
                 </div>
             );
             return (
