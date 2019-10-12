@@ -23,7 +23,7 @@ class InstaFeed extends React.Component {
                         <InstaItem key={index} src={edge.node.thumbnail_resources[2].src} />
                         <a href={"https://www.instagram.com/p/" + edge.node.shortcode} target="_blank">
                             <div className="overlay">
-                                <span className="text-sm text-karla-uppercase text-center instaText">see post on instagram</span>
+                                <span className="text-xs sm:text-sm text-karla-uppercase text-center instaText">see post on instagram</span>
                             </div>
                         </a>
                     </div>
