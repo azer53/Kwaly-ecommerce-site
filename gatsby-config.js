@@ -4,9 +4,9 @@ require("dotenv").config({
 
 module.exports = {
   siteMetadata: {
-    title: `Commerce 2020`,
-    description: `E-Commerce JAM starter with Gatsby as static site generator, utility based styling with Tailwind and deployment on Netlify. To be cloned to extend with API's and content management for E-commerce`,
-    author: `Eli Colpaert`,
+    title: `KWALY`,
+    description: `Organic Recycled Clothing`,
+    author: `KWALY`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
