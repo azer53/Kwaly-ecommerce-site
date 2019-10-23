@@ -14,11 +14,16 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   const result = await graphql(
     `
       query {
-        allContentfulClothes {
+        allContentfulProduct {
           edges {
             node {
               slug
-              entry
+              title
+              variants {
+                initialStockLevel
+                price
+                size
+              }
             }
           }
         }
@@ -33,10 +38,10 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   // Create pages for each product.
   const productTemplate = path.resolve(`src/templates/productTemplate.js`)
-  result.data.allContentfulClothes.edges.forEach(({ node }) => {
+  result.data.allContentfulProduct.edges.forEach(({ node }) => {
     console.log(node)
     const productSlug = node.slug
-    productService.createProduct(node.entry)
+    productService.createProduct(node)
     createPage({
       path: "shop/" + productSlug,
       component: productTemplate,
