@@ -6,7 +6,7 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY)
 module.exports = {
   createProduct: function(product) {
     if (productExists(product.slug)) {
-      //updateBaseProduct(product)
+      //todo fix updateBaseProduct(product)
     } else {
       createBaseProducts(product)
     }
@@ -62,7 +62,7 @@ function updateBaseProduct(baseProduct) {
 
 function skuExists(skuId) {
   stripe.skus.retrieve(skuId, function(err, sku) {
-    // asynchronously called
+    // asynchronously called, todo fix
     if (sku) return true
     else return false
   })
