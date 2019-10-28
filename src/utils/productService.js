@@ -26,9 +26,7 @@ function createSkus(variants, baseProductStripeId) {
         currency: "eur",
         inventory: { type: "finite", quantity: variant.initialStockLevel },
       },
-      function(err, sku) {
-        console.log(err)
-      }
+      function(err, sku) {}
     )
   })
 }
@@ -42,7 +40,6 @@ function createBaseProducts(baseProduct) {
       attributes: ["size", "name"],
     },
     function(err, product) {
-      console.log(err)
       createSkus(baseProduct.variants, product.id)
     }
   )
@@ -51,7 +48,6 @@ function createBaseProducts(baseProduct) {
 function updateBaseProduct(baseProduct) {
   //images and descriptions can be changed here
   stripe.products.update(baseProduct.title, function(err, product) {
-    console.log(err)
     baseProduct.variants.forEach(function(variant) {
       if (!skuExists(product.id + "-" + variant.size)) {
         var variants = [variant]
@@ -65,12 +61,15 @@ function skuExists(skuId) {
   stripe.skus.retrieve(skuId, function(err, sku) {
     // asynchronously called
     if (sku) return true
+    else return false
   })
 }
 
 function productExists(productId) {
   stripe.products.retrieve(productId, function(err, product) {
-    // asynchronously called
+    console.log(product)
+    console.log(err)
     if (product) return true
+    else return false
   })
 }
