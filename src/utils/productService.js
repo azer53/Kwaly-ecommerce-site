@@ -6,7 +6,7 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY)
 module.exports = {
   createProduct: function(product) {
     if (productExists(product.slug)) {
-      updateBaseProduct(product)
+      //updateBaseProduct(product)
     } else {
       createBaseProducts(product)
     }
