@@ -17,19 +17,27 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
-        {
-      resolve: 'gatsby-background-image',
+    {
+      resolve: "gatsby-background-image",
       options: {
         // add your own characters to escape, replacing the default ':/'
-        specialChars: '/:',
+        specialChars: "/:",
       },
-    },{
-      resolve:`gatsby-plugin-sharp`,
-      options: {
-      defaultQuality: 90,
     },
+    {
+      resolve: `gatsby-plugin-sharp`,
+      options: {
+        defaultQuality: 90,
+      },
     },
     `gatsby-transformer-sharp`,
+    {
+      resolve: `gatsby-plugin-netlify-functions`,
+      options: {
+        functionsSrc: `${__dirname}/src/functions`,
+        functionsOutput: `${__dirname}/functions`,
+      },
+    },
     `gatsby-plugin-stripe`,
     {
       resolve: `gatsby-plugin-manifest`,
@@ -46,18 +54,18 @@ module.exports = {
     {
       resolve: `gatsby-source-stripe`,
       options: {
-        objects: ['Product', 'Sku', 'Subscription'],
+        objects: ["Product", "Sku", "Subscription"],
         secretKey: process.env.STRIPE_SECRET_KEY,
         downloadFiles: true,
-      }
+      },
     },
     `gatsby-plugin-postcss`,
     {
       resolve: `gatsby-plugin-purgecss`,
       options: {
         tailwind: true,
-        purgeOnly: [`src/css/style.css`]
-      }
+        purgeOnly: [`src/css/style.css`],
+      },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
@@ -70,6 +78,6 @@ module.exports = {
         accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
       },
     },
-    'gatsby-transformer-remark'
+    "gatsby-transformer-remark",
   ],
 }
