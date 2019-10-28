@@ -40,7 +40,10 @@ function createBaseProducts(baseProduct) {
       attributes: ["size", "name"],
     },
     function(err, product) {
-      createSkus(baseProduct.variants, product.id)
+      //contains bug!
+      if (product) {
+        createSkus(baseProduct.variants, product.id)
+      }
     }
   )
 }
