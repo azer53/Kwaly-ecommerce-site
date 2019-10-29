@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import Img from "gatsby-image"
 import Layout from "../components/layout"
+import OfflineBuy from "../components/OfflineBuy"
 
 export default class productTemplate extends Component {
   constructor(props) {
@@ -77,9 +78,7 @@ export default class productTemplate extends Component {
               <button className="flex-auto w-2/3 mx-5 text-karla-uppercase shadow-lg border-2 hover:bg-gray-100">
                 Add To Cart
               </button>
-              <button className="flex-auto w-2/3 mx-5 text-karla-uppercase shadow-lg border-2 hover:bg-gray-100 bg-gray-400">
-                Offline Buy
-              </button>
+              <OfflineBuy />
             </div>
             <div
               className="my-8"
