@@ -11,7 +11,7 @@ const AdminPage = ({ data }) => {
   const baseProducts = data.allStripeProduct.edges
   const allSkus = data.allStripeSku.edges
 
-  if (!isLoggedIn)
+  if (isLoggedIn)
     return (
       <Layout>
         <div className="container mx-auto pt-4 pb-12">
