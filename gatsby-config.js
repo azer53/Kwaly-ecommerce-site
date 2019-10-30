@@ -33,6 +33,12 @@ module.exports = {
     `gatsby-transformer-sharp`,
     `gatsby-plugin-stripe`,
     {
+      resolve: `gatsby-plugin-netlify-identity`,
+      options: {
+        url: process.env.NETLIFY_INSTANCE, // required!
+      },
+    },
+    {
       resolve: `gatsby-plugin-manifest`,
       options: {
         name: `Commerce 2020`,
