@@ -39,7 +39,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   // Create pages for each product.
   const productTemplate = path.resolve(`src/templates/productTemplate.js`)
   result.data.allContentfulProduct.edges.forEach(({ node }) => {
-    console.log(node)
     const productSlug = node.slug
     productService.createProduct(node)
     createPage({
