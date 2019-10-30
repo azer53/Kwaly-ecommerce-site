@@ -15,7 +15,6 @@ const Auth = ({ children }) => {
       identity.user.user_metadata.full_name) ||
     "NoName"
 
-  console.log(identity)
   const isLoggedIn = identity && identity.isLoggedIn
   return (
     <>

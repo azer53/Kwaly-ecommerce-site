@@ -26,11 +26,7 @@ const AdminPage = ({ data }) => {
         </div>
       </Layout>
     )
-  else
-    return (
-      //<div>nothing to find here</div>
-      <Redirect to={`/404`} noThrow />
-    )
+  else return <Redirect to={`/404`} noThrow />
 }
 
 export const query = graphql`

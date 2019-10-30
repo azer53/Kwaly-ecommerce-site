@@ -27,7 +27,6 @@ class IndexPage extends React.Component {
       .then(res => res.json())
       .then(data => {
         this.setState({ result: data })
-        console.log(this.state.result)
       })
       .catch(console.log)
   }
