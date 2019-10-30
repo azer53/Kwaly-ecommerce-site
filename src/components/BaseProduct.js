@@ -1,7 +1,9 @@
 import React from "react"
 
 const BaseProduct = props => {
-  console.log(props)
+  const isOdd = value => {
+    return value % 2 === 1
+  }
   const baseProduct = props.product
   const skus = props.skus
   return (
@@ -19,8 +21,7 @@ const BaseProduct = props => {
           {skus.map((item, index) => {
             const sku = item.node
             return (
-              <tr>
-                {/* <tr class="bg-gray-100"> */}
+              <tr className={isOdd(index) ? "bg-gray-100" : ""}>
                 <td class="border px-4 py-2"> {sku.attributes.size}</td>
                 <td class="border px-4 py-2">{sku.inventory.quantity}</td>
                 <td class="border px-4 py-2">{sku.price / 100}</td>
