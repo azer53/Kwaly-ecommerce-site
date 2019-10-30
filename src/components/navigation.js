@@ -57,12 +57,16 @@ const Navigation = () => {
             >
               SOCIAL
             </Link>
-            <Link
-              to={`/admin`}
-              className="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-500 mx-4 uppercase"
-            >
-              Admin
-            </Link>
+            {isLoggedIn ? (
+              <Link
+                to={`/admin`}
+                className="block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-500 mx-4 uppercase"
+              >
+                Admin
+              </Link>
+            ) : (
+              ""
+            )}
           </div>
         </div>
       </nav>
