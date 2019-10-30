@@ -21,9 +21,8 @@ const Auth = ({ children }) => {
   return (
     <>
       <nav>
-        Login Status:
         <button className="btn" onClick={() => setDialog(true)}>
-          {isLoggedIn ? `Hello ${name}, Log out here!` : " Log In"}
+          {isLoggedIn ? `Hello ${name}, Log out here!` : "Log In"}
         </button>
       </nav>
       <main>{children}</main>
