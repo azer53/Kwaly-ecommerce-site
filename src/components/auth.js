@@ -11,9 +11,8 @@ const Auth = ({ children }) => {
   const name =
     (identity &&
       identity.user &&
-      identity.user.full_name &&
       identity.user.user_metadata &&
-      identity.user.user_metadata.name) ||
+      identity.user.user_metadata.full_name) ||
     "NoName"
 
   console.log(identity)
