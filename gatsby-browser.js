@@ -1,9 +1,15 @@
+import React from "react"
+import GlobalContextProvider from "./src/context/GlobalContextProvider"
 require("./src/css/style.css");
 
+
+export const wrapRootElement = ({ element }) => {
+  return <GlobalContextProvider>{element}</GlobalContextProvider>
+}
 // ES5 way
 // exports.onClientEntry = () => {
 // ES6 way
-exports.onClientEntry = () => {
+export const onClientEntry = () => {
   // IntersectionObserver polyfill for gatsby-background-image (Safari, IE)
   if (typeof window.IntersectionObserver === `undefined`) {
     import(`intersection-observer`)
@@ -11,7 +17,7 @@ exports.onClientEntry = () => {
   }
 }
 
-exports.onInitialClientRender = () => {
+export const onInitialClientRender = () => {
     document.addEventListener('scroll', function () {
         var scrollpos = window.scrollY;
         var header = document.getElementById("header");

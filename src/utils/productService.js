@@ -15,12 +15,14 @@ module.exports = {
 
 function createSkus(variants, baseProductStripeId) {
   variants.forEach(function(variant) {
+    const name = baseProductStripeId + "-" + variant.size
     stripe.skus.create(
       {
+        id: name.toLowerCase(),
         product: baseProductStripeId,
         attributes: {
           size: variant.size,
-          name: baseProductStripeId + "-" + variant.size,
+          name: name.toLowerCase(),
         },
         price: variant.price * 100,
         currency: "eur",

@@ -41,10 +41,10 @@ const SkuCard = class extends React.Component {
                                 :<div></div>
                         }
                     <div className="pt-8 text-karla-uppercase">
-                    {sku.displayName}
+                    {sku.title}
                     </div>
                     <div>
-                    € {sku.price}
+                    € {sku.variants[0].price}
                     </div>
                     
                     </div>
