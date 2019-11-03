@@ -96,6 +96,7 @@ export const query = graphql`
         query($productSlug: String!) {
             contentfulProduct(slug: {eq: $productSlug}) {
                 id
+                slug
                 color
                 title
                 description {

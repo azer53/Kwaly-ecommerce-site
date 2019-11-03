@@ -1,9 +1,37 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { GlobalStateContext, GlobalDispatchContext } from "../context/GlobalContextProvider"
+import { navigate } from 'gatsby'
 
 function Cart(props) {
     const state = useContext(GlobalStateContext)
     const dispatch = useContext(GlobalDispatchContext)
+    var stripe = {}
+
+    useEffect(() => {
+        stripe = window.Stripe("pk_test_FG6j3VfEjsmemuMqAXO0ZkC9");
+    });
+
+    const checkOut = () => {
+        const skusForCheckout = state.cart.map((item) => {
+            return {
+                sku: item.slug.toLowerCase() + "-" + item.selectedSize.toLowerCase(),
+                quantity: item.orderQuantity
+            }
+        })
+
+        fetch("http://localhost:8000/.netlify/functions/checkout",
+            {
+                method: 'POST',
+                body: JSON.stringify(skusForCheckout),
+                headers: new Headers({
+                    'Content-Type': 'application/json'
+                })
+            }
+        ).then(res => {
+            return res.json();
+        })
+            .then((response) => { navigate('./payment', {state: {paymentIntentId: response.paymentIntent.id}})})
+    }
 
     return (
         <div className={`${state.cart.length > 0 ? `block` : `hidden`} absolute md:w-2/6 lg:w-1/6 sm:right-auto right-0 mt-12 bg-gray-200 shadow-lg p-4 sm:-ml-12 sm:mt-10 lg:mt-6 rounded-sm z-50`}>
@@ -31,7 +59,7 @@ function Cart(props) {
                 Total: <span className="float-right font-bold">€{state.cart.total}</span>
             </div>
             <div className="text-center">
-                <button className="text-karla-uppercase p-4 shadow-xl my-4 bg-gray-600 text-gray-100 hover:underline">
+                <button onClick={() => checkOut()} className="text-karla-uppercase p-4 shadow-xl my-4 bg-gray-600 text-gray-100 hover:underline">
                     CHECK OUT
                 </button>
             </div>

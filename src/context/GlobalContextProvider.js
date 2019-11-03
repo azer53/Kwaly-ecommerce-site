@@ -1,10 +1,13 @@
 import React from "react"
+import {store} from 'react-easy-state' 
+
 
 export const GlobalStateContext = React.createContext()
 export const GlobalDispatchContext = React.createContext()
 
 const initialState = {
-  cart: []
+  cart: [] ,
+  paymentIntentId: 0
 }
 
 function reducer(state, action) {
@@ -39,6 +42,9 @@ function reducer(state, action) {
 
       calcTotals(state.cart)
       return { ...state }
+    }
+    case "ADD_PAYMENT_INTENT_ID":{
+      state.paymentIntentId = action.value;
     }
     default:
       throw new Error("Bad Action Type")

@@ -2,7 +2,21 @@ require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
 })
 
+var proxy = require("http-proxy-middleware")
+
+
 module.exports = {
+  developMiddleware: app => {
+    app.use(
+      "/.netlify/functions/",
+      proxy({
+        target: "http://localhost:9000",
+        pathRewrite: {
+          "/.netlify/functions/": "",
+        },
+      })
+    )
+  },
   siteMetadata: {
     title: `KWALY`,
     description: `Organic Recycled Clothing`,
