@@ -1,16 +1,14 @@
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
+console.log("-- Start checkout --")
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 exports.handler = async (event, context, callback) => {
-
-  require("dotenv").config({
-    path: `.env.${process.env.NODE_ENV}`,
-  })
-  console.log("-- Start checkout --")
-  const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
   
   const headers = {
     "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Headers": "Content-Type",
-    "X-Messing": "around"
+    "Access-Control-Allow-Headers": "Content-Type"
   };
   
   //-- We only care to do anything if this is our POST request.
@@ -24,13 +22,14 @@ exports.handler = async (event, context, callback) => {
   }
 
   // Parse the body contents into an object.
-    let data ={}
+    let data = [];
     let price = 0;
     try{
-      const data = JSON.parse(event.body);
+      data = JSON.parse(event.body);
       console.log(data);
     }
     catch{
+      console.log("-- Catch: error parsing JSON --")
       callback(null, {
         statusCode: 200,
         body: 'Error parsing data. Expecting [{"sku": "sku-name", "quantity": 1 }], received: ' + JSON.stringify(event.body)  
@@ -38,7 +37,7 @@ exports.handler = async (event, context, callback) => {
     }
 
 
-  var skusPriceData = new Promise((resolve, reject)=>{
+  let skusPriceData = new Promise((resolve, reject)=>{
     data.forEach((element,index,array) => {
       stripe.skus.retrieve(
         element.sku,
@@ -56,8 +55,7 @@ exports.handler = async (event, context, callback) => {
 
 
   skusPriceData.then(()=>{
-
-
+    console.log("-- Initiating paymentIntent --")
     (async () => {
        const paymentIntent = await stripe.paymentIntents.create({
         amount: price,
