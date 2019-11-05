@@ -14,6 +14,7 @@ exports.handler = async (event, context, callback) => {
   
   //-- We only care to do anything if this is our POST request.
   if (event.httpMethod !== 'POST' || !event.body) {
+    console.log("NOT A POST REQUEST")
     callback(null, {
       statusCode: 200,
       body: 'This was not a POST request'
