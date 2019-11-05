@@ -1,7 +1,7 @@
-console.log(require("dotenv").config({
+require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
-}))
-
+})
+console.log("-- Start checkout --")
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 const headers = {
