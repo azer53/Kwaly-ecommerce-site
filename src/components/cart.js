@@ -5,7 +5,7 @@ import { navigate } from 'gatsby'
 function Cart(props) {
     const state = useContext(GlobalStateContext)
     const dispatch = useContext(GlobalDispatchContext)
-    var stripe = {}
+    let stripe = {}
 
     useEffect(() => {
         stripe = window.Stripe("pk_test_FG6j3VfEjsmemuMqAXO0ZkC9");
@@ -30,7 +30,12 @@ function Cart(props) {
         ).then(res => {
             return res.json();
         })
-            .then((response) => { navigate('./payment', {state: {paymentIntentId: response.paymentIntent.id}})})
+            .then((response) => {
+                dispatch({type: "ADD_PAYMENT_INTENT_ID", value:response.paymentIntent.id})
+                navigate('./payment', {
+                    state: { clientSecret: response.paymentIntent.client_secret }
+                })
+            })
     }
 
     return (

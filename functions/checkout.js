@@ -1,4 +1,8 @@
-require('dotenv').config();
+console.log(require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+}))
+
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 const headers = {
   "Access-Control-Allow-Origin": "*",
@@ -19,7 +23,6 @@ exports.handler = async (event, context, callback) => {
 
   // Parse the body contents into an object.
   const data = JSON.parse(event.body);
-  const stripe = require('stripe')('sk_test_BteocGRq9IiIiKrHYLLAjpb3');
   let price = 0;
 
   console.log(data);
@@ -36,7 +39,7 @@ exports.handler = async (event, context, callback) => {
       );
     })
   }).catch((err)=>{
-    console.log("ERROR IN PROMISE")
+    console.log("-- ERROR RETRIEVING SKUS --")
     console.log(err)
   });
 
@@ -51,6 +54,7 @@ exports.handler = async (event, context, callback) => {
         payment_method_types: ['card'],
       });
 
+      console.log(paymentIntent)
       console.log("sending status OK")
       callback(null, {
         statusCode: 200,
