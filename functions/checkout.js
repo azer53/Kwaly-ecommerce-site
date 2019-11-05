@@ -1,17 +1,17 @@
-require("dotenv").config({
-  path: `.env.${process.env.NODE_ENV}`,
-})
-console.log("-- Start checkout --")
-const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
-
-const headers = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "Content-Type"
-};
-
 
 exports.handler = async (event, context, callback) => {
 
+  require("dotenv").config({
+    path: `.env.${process.env.NODE_ENV}`,
+  })
+  console.log("-- Start checkout --")
+  const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
+  
+  const headers = {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Headers": "Content-Type"
+  };
+  
   //-- We only care to do anything if this is our POST request.
   if (event.httpMethod !== 'POST' || !event.body) {
     callback(null, {
