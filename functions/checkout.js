@@ -9,7 +9,8 @@ exports.handler = async (event, context, callback) => {
   
   const headers = {
     "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Headers": "Content-Type"
+    "Access-Control-Allow-Headers": "Content-Type",
+    "X-Messing": "around"
   };
   
   //-- We only care to do anything if this is our POST request.
@@ -23,10 +24,19 @@ exports.handler = async (event, context, callback) => {
   }
 
   // Parse the body contents into an object.
-  const data = JSON.parse(event.body);
-  let price = 0;
+    let data ={}
+    let price = 0;
+    try{
+      const data = JSON.parse(event.body);
+      console.log(data);
+    }
+    catch{
+      callback(null, {
+        statusCode: 200,
+        body: 'Error parsing data. Expecting [{"sku": "sku-name", "quantity": 1 }], received: ' + JSON.stringify(event.body)  
+      });
+    }
 
-  console.log(data);
 
   var skusPriceData = new Promise((resolve, reject)=>{
     data.forEach((element,index,array) => {
