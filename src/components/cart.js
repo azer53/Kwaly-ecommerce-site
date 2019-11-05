@@ -19,7 +19,7 @@ function Cart(props) {
             }
         })
 
-        fetch("http://localhost:8000/.netlify/functions/checkout",
+        fetch("/.netlify/functions/checkout",
             {
                 method: 'POST',
                 body: JSON.stringify(skusForCheckout),
