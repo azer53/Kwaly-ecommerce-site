@@ -30,35 +30,6 @@ function Cart(props) {
       .then(response => {
         dispatch({
           type: "ADD_PAYMENT_INTENT_ID",
-          value: response.paymentIntent.id,
-        })
-        navigate("./payment", {
-          state: { clientSecret: response.paymentIntent.client_secret },
-        })
-      })
-  }
-
-  const checkOut2 = () => {
-    const body = {}
-    body.items = state.cart.map(item => {
-      return {
-        sku: item.slug.toLowerCase() + "-" + item.selectedSize.toLowerCase(),
-        quantity: item.orderQuantity,
-      }
-    })
-    fetch("/.netlify/functions/checkout2", {
-      method: "POST",
-      body: JSON.stringify(body),
-      headers: new Headers({
-        "Content-Type": "application/json",
-      }),
-    })
-      .then(res => {
-        return res.json()
-      })
-      .then(response => {
-        dispatch({
-          type: "ADD_PAYMENT_INTENT_ID",
           value: response.clientSecret,
         })
         navigate("./payment", {
@@ -95,9 +66,8 @@ function Cart(props) {
             </div>
             <div className="my-2">Size: {item.selectedSize}</div>
             <div className="mb-2">
-              Quantity: {item.orderQuantity}{" "}
+              Quantity: {item.orderQuantity}
               <span className="float-right font-bold">
-                {" "}
                 €{item.orderQuantity * item.price}
               </span>
             </div>
@@ -107,8 +77,7 @@ function Cart(props) {
                 dispatch({ type: "DELETE_FROM_CART", value: item })
               }}
             >
-              {" "}
-              Remove item from cart{" "}
+              Remove item from cart
             </button>
           </div>
         )
@@ -123,13 +92,6 @@ function Cart(props) {
           className="text-karla-uppercase p-4 shadow-xl my-4 bg-gray-600 text-gray-100 hover:underline"
         >
           CHECK OUT
-        </button>
-
-        <button
-          onClick={() => checkOut2()}
-          className="text-karla-uppercase p-4 shadow-xl my-4 bg-gray-600 text-gray-100 hover:underline"
-        >
-          CHECK OUT 2
         </button>
       </div>
     </div>
