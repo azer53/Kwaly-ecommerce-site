@@ -5,15 +5,20 @@ require("dotenv").config({
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY)
 
 const calculateOrderAmount = async items => {
-  console.log(items)
-  const res = await stripe.skus.retrieve("recycled-kwaly-sweater-small")
-  return res.price
+  console.log("Start")
+  let total = 0
+
+  for (let index = 0; index < items.length; index++) {
+    const sku = await stripe.skus.retrieve(items[index].sku)
+    total += sku.price * items[index].quantity
+  }
+  return total
 }
 
 exports.handler = async (event, context, callback) => {
   const data = JSON.parse(event.body)
   const items = data.items
-
+  console.log(items)
   const paymentIntent = await stripe.paymentIntents.create({
     amount: await calculateOrderAmount(items),
     currency: "eur",
