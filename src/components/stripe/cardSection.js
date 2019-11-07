@@ -1,11 +1,13 @@
-import React, { useState } from "react"
-import { CardElement, IbanElement } from "react-stripe-elements"
+import React, { useState, useContext } from "react"
+import { CardElement } from "react-stripe-elements"
+import { GlobalStateContext } from "../../context/GlobalContextProvider"
+import { navigate } from "@reach/router"
 
 export default function CardSection(props) {
   const [isCreditSelected, setIsCreditSelected] = useState(true)
   const [isDebitSelected, setIsDebitSelected] = useState(false)
   const [displayError, setDisplayError] = useState("")
-
+  const state = useContext(GlobalStateContext)
   const ref = props.reference
 
   const addEventListener = element => {
@@ -16,6 +18,24 @@ export default function CardSection(props) {
         setDisplayError("")
       }
     })
+  }
+  const handleBancontact = (event) => {
+      event.preventDefault();
+    props.stripe
+      .createSource({
+        type: "bancontact",
+        amount: 1099,
+        currency: "eur",
+        owner: {
+          name: "Jenny Rosen",
+        },
+        redirect: {
+          return_url: "https://localhost:8000/success",
+        },
+      })
+      .then(function(result) {
+        navigate(result.source.redirect.url)
+      })
   }
 
   return (
@@ -84,10 +104,9 @@ export default function CardSection(props) {
           isDebitSelected ? `block` : `hidden`
         } md:w-1/2 shadow-xl p-2 my-4`}
       >
-        <IbanElement
-          style={{ base: { fontSize: "18px" } }}
-          supportedCountries={["SEPA"]}
-        ></IbanElement>
+        <button onClick={handleBancontact}>
+          Pay €{state.cart.total} with Bancontact
+        </button>
       </div>
     </div>
   )

@@ -303,7 +303,7 @@ function CheckoutForm(props) {
             </div>
           </div>
         </div>
-        <CardSection reference={ref} />
+        <CardSection reference={ref} stripe={props.stripe} />
         <button
           disabled={Object.keys(errors).length > 0}
           className={`${
