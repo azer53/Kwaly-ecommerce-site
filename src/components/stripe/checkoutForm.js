@@ -4,16 +4,12 @@ import { injectStripe } from "react-stripe-elements"
 import useForm from "react-hook-form"
 import LoadingOverlay from "react-loading-overlay"
 import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader"
-import {
-  GlobalStateContext,
-  GlobalDispatchContext,
-} from "../../context/GlobalContextProvider"
+import { GlobalDispatchContext } from "../../context/GlobalContextProvider"
 
 function CheckoutForm(props) {
   const ref = React.createRef()
   const { register, handleSubmit, errors, getValues } = useForm()
   const [isLoading, setIsLoading] = useState(false)
-  const state = useContext(GlobalStateContext)
   const dispatch = useContext(GlobalDispatchContext)
 
   const updateShipping = () => {

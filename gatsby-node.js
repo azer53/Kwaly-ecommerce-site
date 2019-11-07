@@ -8,9 +8,9 @@ const productService = require(`./src/utils/productService.js`)
 
 exports.onCreateWebpackConfig = ({ actions }) => {
   actions.setWebpackConfig({
-      devtool: "eval-source-map"
-  });
-};
+    devtool: "eval-source-map",
+  })
+}
 // Implement the Gatsby API “createPages”. This is called once the
 // data layer is bootstrapped to let plugins create pages from data.
 exports.createPages = async ({ graphql, actions, reporter }) => {
@@ -44,9 +44,8 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   // Create pages for each product.
   const productTemplate = path.resolve(`src/templates/productTemplate.js`)
   result.data.allContentfulProduct.edges.forEach(({ node }) => {
-    console.log(node)
     const productSlug = node.slug
-    productService.createProduct(node) 
+    productService.createProduct(node)
     createPage({
       path: "shop/" + productSlug,
       component: productTemplate,

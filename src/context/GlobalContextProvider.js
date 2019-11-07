@@ -11,13 +11,13 @@ const initialState = {
 function reducer(state, action) {
   switch (action.type) {
     case "ADD_TO_CART": {
-      var item = state.cart.find(
+      let item = state.cart.find(
         item =>
-          item.id == action.value.id &&
-          item.selectedSize == action.value.selectedSize
+          item.id === action.value.id &&
+          item.selectedSize === action.value.selectedSize
       )
-      if (item != undefined) {
-        var index = state.cart.indexOf(item)
+      if (item !== undefined) {
+        let index = state.cart.indexOf(item)
         state.cart[index].orderQuantity += action.value.orderQuantity
       } else {
         state.cart = state.cart.concat(action.value)
@@ -29,15 +29,15 @@ function reducer(state, action) {
       }
     }
     case "DELETE_FROM_CART": {
-      var item = state.cart.find(
+      let item = state.cart.find(
         item =>
-          item.id == action.value.id &&
-          item.selectedSize == action.value.selectedSize
+          item.id === action.value.id &&
+          item.selectedSize === action.value.selectedSize
       )
-      var index = state.cart.indexOf(item)
+      let index = state.cart.indexOf(item)
       state.cart[index].orderQuantity -= 1
 
-      if (state.cart[index].orderQuantity == 0) state.cart.splice(index, 1)
+      if (state.cart[index].orderQuantity === 0) state.cart.splice(index, 1)
 
       calcTotals(state.cart)
       return { ...state }
@@ -75,7 +75,7 @@ const sumPrice = cart => {
 const calcTotals = cart => {
   // calculate total price
   cart.total = sumPrice(cart)
-  if (cart.shippingPrice != undefined) {
+  if (cart.shippingPrice !== undefined) {
     cart.total += cart.shippingPrice
   }
 

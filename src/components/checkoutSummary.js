@@ -31,8 +31,13 @@ export default function CheckoutSummary() {
           </div>
         )
       })}
-      {state.cart.shippingPrice != undefined && (
-        <div className="my-2">Selected shipping option <span className="float-right font-bold">€ {state.cart.shippingPrice}</span></div>
+      {state.cart.shippingPrice !== undefined && (
+        <div className="my-2">
+          Selected shipping option{" "}
+          <span className="float-right font-bold">
+            € {state.cart.shippingPrice}
+          </span>
+        </div>
       )}
 
       <div className="mt-1 pt-2 text-2xl">
