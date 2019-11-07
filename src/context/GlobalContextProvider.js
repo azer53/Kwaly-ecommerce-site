@@ -64,8 +64,9 @@ function reducer(state, action) {
       state.paymentIntentId = action.value
       return { ...state }
     }
-    default:
+    default: {
       throw new Error("Bad Action Type")
+    }
   }
 }
 

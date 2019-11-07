@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react"
 import Img from "gatsby-image"
 import Layout from "../components/layout"
 import { GlobalDispatchContext } from "../context/GlobalContextProvider"
+import { graphql } from "gatsby"
 
 function ProductTemplate({ data }) {
   const dispatch = useContext(GlobalDispatchContext)

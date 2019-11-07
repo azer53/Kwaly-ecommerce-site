@@ -72,8 +72,6 @@ function skuExists(skuId) {
 
 function productExists(productId) {
   stripe.products.retrieve(productId, function(err, product) {
-    console.log(product)
-    console.log(err)
     if (product) return true
     else return false
   })
