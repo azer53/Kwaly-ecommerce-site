@@ -5,7 +5,6 @@ require("dotenv").config({
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY)
 
 const calculateOrderAmount = async items => {
-  console.log("Start")
   let total = 0
 
   for (let index = 0; index < items.length; index++) {
