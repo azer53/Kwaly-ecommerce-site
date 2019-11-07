@@ -1,5 +1,4 @@
 import React from "react"
-import { Link } from "gatsby"
 
 //import InstaItem from "./instaItem.js"
 
@@ -12,7 +11,7 @@ class InstaFeed extends React.Component {
     function Row(props) {
       const edges = props.edges.slice(0, 5)
       const instaItems = edges.map((edge, index) => (
-        <div className="flex-initial px-2 w-1/5">
+        <div key={index} className="flex-initial px-2 w-1/5">
           <div className="instaContainer">
             <InstaItem key={index} src={edge.node.thumbnail_resources[2].src} />
             <a
@@ -45,11 +44,11 @@ class InstaFeed extends React.Component {
         </div>
 
         <div className="text-center">
-          <Link to="https://www.instagram.com/kwaly_/">
+          <a href="https://www.instagram.com/kwaly_/">
             <button className="text-karla-uppercase text-sm my-8 p-4 bg-gray-300 shadow-lg">
               Follow us on Instagram
             </button>
-          </Link>
+          </a>
         </div>
       </div>
     )

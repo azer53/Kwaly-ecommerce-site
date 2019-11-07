@@ -5,54 +5,39 @@ import useForm from "react-hook-form"
 import LoadingOverlay from "react-loading-overlay"
 import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader"
 import { GlobalDispatchContext } from "../../context/GlobalContextProvider"
+import { handleBancontactPayment, handleCreditCardPayment } from "../../utils/paymentService"
 
 function CheckoutForm(props) {
   const ref = React.createRef()
   const { register, handleSubmit, errors, getValues } = useForm()
   const [isLoading, setIsLoading] = useState(false)
+  const [selectedCard, setSelectedCard] = useState("credit");
   const dispatch = useContext(GlobalDispatchContext)
 
   const updateShipping = () => {
     const formValues = getValues()
-
     dispatch({ type: "UPDATE_SHIPPING", value: formValues.shipping })
   }
 
-  const onSubmit = data => {
-    setIsLoading(true)
-    const fullName = data.fName + "" + data.lName
 
-    props.stripe
-      .handleCardPayment(props.clientSecret, {
-        payment_method_data: {
-          billing_details: {
-            name: fullName,
-          },
-        },
-        shipping: {
-          address: {
-            line1: data.street,
-            city: data.city,
-            country: data.country,
-            postal_code: data.postal,
-          },
-          name: fullName,
-        },
-        receipt_email: data.email,
-      })
-      .then(result => {
-        setIsLoading(false)
-        if (result.error) {
-          //show error
-          console.log(result.error)
-          return
-        }
-        if (result.paymentIntent) {
-          //todo - redirect to overview page
-          console.log(result.paymentIntent)
-          return
-        }
-      })
+
+  const onSubmit = data => {
+    setIsLoading(true);
+    data.clientSecret = props.clientSecret;
+    
+    // handle card
+    switch (selectedCard) {
+      case "debit":
+          handleBancontactPayment(data, props.stripe);
+        break;
+      case "credit":
+          handleCreditCardPayment(data, props.stripe);
+        break;
+      default:
+        break;
+    }
+
+    setIsLoading(false);
   }
 
   return (
@@ -303,17 +288,7 @@ function CheckoutForm(props) {
             </div>
           </div>
         </div>
-        <CardSection reference={ref} stripe={props.stripe} />
-        <button
-          disabled={Object.keys(errors).length > 0}
-          className={`${
-            Object.keys(errors).length > 0
-              ? `bg-gray-500`
-              : `bg-green-700 hover:bg-green-800`
-          } text-karla-uppercase border rounded text-gray-100 p-4 my-4`}
-        >
-          Confirm order
-        </button>
+        <CardSection reference={ref} errors={errors} setSelectedCard={setSelectedCard} />
       </form>
     </LoadingOverlay>
   )

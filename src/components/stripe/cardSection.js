@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react"
 import { CardElement } from "react-stripe-elements"
 import { GlobalStateContext } from "../../context/GlobalContextProvider"
-import { navigate } from "@reach/router"
+
 
 export default function CardSection(props) {
   const [isCreditSelected, setIsCreditSelected] = useState(true)
@@ -19,23 +19,9 @@ export default function CardSection(props) {
       }
     })
   }
-  const handleBancontact = (event) => {
-      event.preventDefault();
-    props.stripe
-      .createSource({
-        type: "bancontact",
-        amount: 1099,
-        currency: "eur",
-        owner: {
-          name: "Jenny Rosen",
-        },
-        redirect: {
-          return_url: "https://localhost:8000/success",
-        },
-      })
-      .then(function(result) {
-        navigate(result.source.redirect.url)
-      })
+
+  const onChange = (event)=>{
+    props.setSelectedCard(event.target.value);
   }
 
   return (
@@ -48,6 +34,7 @@ export default function CardSection(props) {
           <input
             name="cardOption"
             checked={isCreditSelected}
+            onClick={onChange}
             onChange={() => {
               setIsCreditSelected(!isCreditSelected)
               setIsDebitSelected(!isDebitSelected)
@@ -64,6 +51,7 @@ export default function CardSection(props) {
           <input
             name="cardOption"
             checked={isDebitSelected}
+            onClick={onChange}
             onChange={() => {
               setIsCreditSelected(!isCreditSelected)
               setIsDebitSelected(!isDebitSelected)
@@ -99,13 +87,17 @@ export default function CardSection(props) {
           </span>
         </p>
       </div>
-      <div
-        className={`${
-          isDebitSelected ? `block` : `hidden`
-        } md:w-1/2 shadow-xl p-2 my-4`}
-      >
-        <button onClick={handleBancontact}>
-          Pay €{state.cart.total} with Bancontact
+
+      <div>
+        <button
+          disabled={Object.keys(props.errors).length > 0}
+          className={`${
+            Object.keys(props.errors).length > 0
+              ? `bg-gray-500`
+              : `bg-green-700 hover:bg-green-800`
+          } text-karla-uppercase border rounded text-gray-100 p-4 my-4`}
+        >
+          Pay €{state.cart.total}{isDebitSelected && " with Bancontact"}{isCreditSelected && " with Credit Card"}
         </button>
       </div>
     </div>
