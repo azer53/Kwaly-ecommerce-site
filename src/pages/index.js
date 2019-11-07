@@ -40,19 +40,21 @@ class IndexPage extends React.Component {
           <div className="lg:w-5/12 mx-auto">
             <div className="mx-auto text-center text-karla-uppercase text-2xl">
               <h2 className="mb-8">EMBROIDERED SERIES</h2>
-              <div className="flex justify-center shadow-xl p-4">
-                <div className="flex-1 px-8">
-                  <PinkShirt />
+              <Link to="./shop">
+                <div className="flex justify-center shadow-xl p-4">
+                  <div className="flex-1 px-8">
+                    <PinkShirt />
+                  </div>
+                  <div className="flex-1 px-8">
+                    <BlackShirt />
+                  </div>
                 </div>
-                <div className="flex-1 px-8">
-                  <BlackShirt />
+                <div>
+                  <button className="text-karla-uppercase bg-gray-300 p-4 text-lg shadow-lg -mt-4">
+                    <Link to="./shop">Find out more!</Link>
+                  </button>
                 </div>
-              </div>
-              <div>
-                <button className="text-karla-uppercase bg-gray-300 p-4 text-lg shadow-lg -mt-4">
-                  <Link to="./shop">Find out more!</Link>
-                </button>
-              </div>
+              </Link>
             </div>
           </div>
         </section>
