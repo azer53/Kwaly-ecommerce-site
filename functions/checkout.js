@@ -51,7 +51,8 @@ exports.handler = async (event, context, callback) => {
     })
 
     skusPriceData.then(() => {
-      console.log("-- Initiating paymentIntent --")(async () => {
+      console.log("-- Initiating paymentIntent --")
+      ;(async () => {
         const paymentIntent = await stripe.paymentIntents.create({
           amount: price,
           currency: "eur",
@@ -69,10 +70,10 @@ exports.handler = async (event, context, callback) => {
     })
   } catch (err) {
     console.log(err)
-    callback( null ,{ 
+    callback(null, {
       statusCode: 200,
       headers,
-      body: "ERROR: "+ err
+      body: "ERROR: " + err,
     })
   }
 }

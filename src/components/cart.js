@@ -10,16 +10,18 @@ function Cart(props) {
   const dispatch = useContext(GlobalDispatchContext)
 
   const checkOut = () => {
-    const skusForCheckout = state.cart.map(item => {
+    const body = {}
+    body.items = state.cart.map(item => {
       return {
         sku: item.slug.toLowerCase() + "-" + item.selectedSize.toLowerCase(),
         quantity: item.orderQuantity,
       }
     })
 
-    fetch("/.netlify/functions/checkout", {
+    console.log(body)
+    fetch("/.netlify/functions/checkout2", {
       method: "POST",
-      body: JSON.stringify(skusForCheckout),
+      body: JSON.stringify(body),
       headers: new Headers({
         "Content-Type": "application/json",
       }),
