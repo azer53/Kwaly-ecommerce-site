@@ -9,6 +9,8 @@ const initialState = {
 }
 
 function reducer(state, action) {
+  /*eslint default-case: ["off", { "commentPattern": "^skip\\sdefault" }]*/
+
   switch (action.type) {
     case "ADD_TO_CART": {
       let item = state.cart.find(
