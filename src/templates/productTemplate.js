@@ -113,7 +113,7 @@ function ProductTemplate({ data }) {
               onClick={() => {
                 addToCart(product)
               }}
-              className="flex-auto w-2/3 mx-5 text-karla-uppercase shadow-lg border-2 hover:bg-gray-100"
+              className="flex-auto w-2/3 mx-5 text-karla-uppercase shadow-lg border-2 hover:shadow-xl hover:bg-gray-100"
             >
               Add To Cart
             </button>

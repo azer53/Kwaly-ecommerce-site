@@ -41,7 +41,7 @@ class IndexPage extends React.Component {
             <div className="mx-auto text-center text-karla-uppercase text-2xl">
               <h2 className="mb-8">EMBROIDERED SERIES</h2>
               <Link to="./shop">
-                <div className="flex justify-center shadow-xl p-4">
+                <div className="flex justify-center hover:shadow-2xl shadow-xl p-4">
                   <div className="flex-1 px-8">
                     <PinkShirt />
                   </div>
@@ -50,7 +50,7 @@ class IndexPage extends React.Component {
                   </div>
                 </div>
                 <div>
-                  <button className="text-karla-uppercase bg-gray-300 p-4 text-lg shadow-lg -mt-4">
+                  <button className="hover:shadow-xl text-karla-uppercase bg-gray-300 p-4 text-lg shadow-lg -mt-4">
                     <Link to="./shop">Find out more!</Link>
                   </button>
                 </div>

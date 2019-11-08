@@ -49,9 +49,9 @@ function CheckoutForm(props) {
           </h2>
           <fieldset
             aria-required="true"
-            aria-invalid={errors.Shipping ? "true" : "false"}
+            aria-invalid={errors.shipping ? "true" : "false"}
           >
-            {errors.Shipping && (
+            {errors.shipping && (
               <span className="text-red-500 text-xs italic">
                 Please choose a shipping option, for International orders
                 contact us below
