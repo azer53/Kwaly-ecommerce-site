@@ -35,8 +35,7 @@ const handleCreditCardPayment = async (data, stripe)=>{
           return_url: "https://localhost:8000/success",
         },
       })
-
-        navigate(source.redirect.url)
+      navigate(source.redirect.url)
 
   }
 
