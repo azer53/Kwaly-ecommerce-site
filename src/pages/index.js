@@ -51,7 +51,7 @@ class IndexPage extends React.Component {
                 </div>
                 <div>
                   <button className="hover:shadow-xl text-karla-uppercase bg-gray-300 p-4 text-lg shadow-lg -mt-4">
-                    <Link to="./shop">Find out more!</Link>
+                    Find out more!
                   </button>
                 </div>
               </Link>

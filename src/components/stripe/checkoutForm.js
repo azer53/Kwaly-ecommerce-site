@@ -4,44 +4,68 @@ import { injectStripe } from "react-stripe-elements"
 import useForm from "react-hook-form"
 import LoadingOverlay from "react-loading-overlay"
 import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader"
-import { GlobalDispatchContext } from "../../context/GlobalContextProvider"
-import { handleBancontactPayment, handleCreditCardPayment } from "../../utils/paymentService"
+import { GlobalDispatchContext, GlobalStateContext } from "../../context/GlobalContextProvider"
+import { handleBancontactPayment, handleCreditCardPayment, updatePaymentIntent } from "../../utils/paymentService"
+import { navigate } from "@reach/router"
+
 
 function CheckoutForm(props) {
   const ref = React.createRef()
   const { register, handleSubmit, errors, getValues } = useForm()
   const [isLoading, setIsLoading] = useState(false)
+  const [loadingText, setloadingText] = useState()
   const [selectedCard, setSelectedCard] = useState("credit");
-  const dispatch = useContext(GlobalDispatchContext)
+  const dispatch = useContext(GlobalDispatchContext);
+  const state = useContext(GlobalStateContext);
 
   const updateShipping = () => {
     const formValues = getValues()
     dispatch({ type: "UPDATE_SHIPPING", value: formValues.shipping })
   }
 
-
-
-  const onSubmit = data => {
+  const onSubmit = async(formData) => {
     setIsLoading(true);
-    data.clientSecret = props.clientSecret;
+    formData.clientSecret = props.clientSecret;
     
+    // update shipping depending on chosen method
+    // add metadata to reflect the items in the cart
+    setloadingText("Setting Shipping details");
+    const paymentIntentResponse = await updatePaymentIntent(state.cart, state.paymentIntentId);
+    if (paymentIntentResponse.status !== 200) {
+      alert("There was an error intitating your payment. If the problem persists, contact admin@kwaly.be")
+      return;
+    }
+
+    setloadingText("Handling payment");
     // handle card
     switch (selectedCard) {
       case "debit":
-          handleBancontactPayment(data, props.stripe);
+          handleBancontactPayment(formData, props.stripe, state.cart);
+          dispatch({type: "CLEAR_CART", value: ""});
         break;
       case "credit":
-          handleCreditCardPayment(data, props.stripe);
+          const response = await handleCreditCardPayment(formData, props.stripe, state.cart);
+          if(response.paymentIntent){
+            navigate("./success")
+            dispatch({type: "CLEAR_CART", value: ""})
+          }
+          else{
+            alert("Woops, something went wrong with your credit card!");
+          }
         break;
       default:
         break;
     }
 
-    setIsLoading(false);
+    setloadingText("Redirecting");
+    
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 500); 
   }
 
   return (
-    <LoadingOverlay active={isLoading} spinner={<ClimbingBoxLoader />}>
+    <LoadingOverlay active={isLoading} spinner={<ClimbingBoxLoader/>} text={loadingText} fadeSpeed="1000" >
       <form onSubmit={handleSubmit(onSubmit)} className="">
         <div>
           <h2 className="text-karla-uppercase text-lg font-bold my-4 pb-2 border-b-2">

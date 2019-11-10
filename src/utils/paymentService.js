@@ -1,8 +1,8 @@
 import { navigate } from "@reach/router"
 
-const handleCreditCardPayment = async (data, stripe)=>{
+const handleCreditCardPayment = async(data, stripe, cart)=>{
     const fullName = data.fName + " " + data.lName
-    const response = await stripe.handleCardPayment(data.clientSecret, {
+    return await stripe.handleCardPayment(data.clientSecret, {
         payment_method_data: {
           billing_details: {
             name: fullName,
@@ -17,26 +17,37 @@ const handleCreditCardPayment = async (data, stripe)=>{
           },
           name: fullName,
         },
-        receipt_email: data.email,
+        receipt_email: data.email
       })
-      console.log(response);
+
+    
   }
 
-  const handleBancontactPayment = async (data, stripe) => {
+  const handleBancontactPayment = async (data, stripe, cart) => {
     const fullName = data.fName + " " + data.lName
     const {source} = await stripe.createSource({
         type: "bancontact",
-        amount: 1099,
+        amount: (cart.total * 100),
         currency: "eur",
         owner: {
           name: fullName,
         },
         redirect: {
-          return_url: "https://localhost:8000/success",
+          return_url: "http://localhost:8000/success",
         },
       })
       navigate(source.redirect.url)
 
   }
 
-export { handleCreditCardPayment, handleBancontactPayment };
+  const updatePaymentIntent = async(cart, paymentIntentId) =>{
+
+    const body = { cart: cart, paymentIntentId: paymentIntentId }
+
+    return fetch("/.netlify/functions/updatepaymentintent", {
+      method: "POST",
+      body: JSON.stringify(body)
+    })
+  }
+
+export { handleCreditCardPayment, handleBancontactPayment, updatePaymentIntent };

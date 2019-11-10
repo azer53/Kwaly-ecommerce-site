@@ -29,6 +29,7 @@ exports.handler = async (event, context, callback) => {
       "Access-Control-Allow-Headers": "Content-Type",
     },
     body: JSON.stringify({
+      paymentIntentId: paymentIntent.id,
       publishableKey: process.env.GATSBY_STRIPE_PUBLIC_KEY,
       clientSecret: paymentIntent.client_secret,
     }),

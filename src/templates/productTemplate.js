@@ -44,12 +44,19 @@ function ProductTemplate({ data }) {
   }
 
   const addToCart = product => {
-    product.orderQuantity = quantity
-    product.selectedSize = selectedSize
     let orderProduct = Object.assign({}, product)
     dispatch({
       type: "ADD_TO_CART",
-      value: orderProduct,
+      value: {
+        // create unique sku to be referenced by stripe //TODO graphql mutation?
+        sku: orderProduct.slug.toLowerCase() + "-" + selectedSize.toLowerCase(),
+        id: orderProduct.id,
+        slug: orderProduct.slug,
+        title: orderProduct.title,
+        selectedSize: selectedSize,
+        price: orderProduct.price,
+        orderQuantity: quantity,
+      },
     })
   }
 

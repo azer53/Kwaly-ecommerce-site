@@ -9,7 +9,7 @@ export default function CheckoutSummary() {
       <h2 className="text-karla-uppercase text-lg font-bold my-4 pb-2 border-b-2">
         Summary
       </h2>
-      {state.cart.map(item => {
+      {state.cart.items.map(item => {
         return (
           <div
             className="border-b-2 pb-2 mt-2"

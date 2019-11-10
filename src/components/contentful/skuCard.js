@@ -3,18 +3,6 @@ import Img from "gatsby-image"
 import { Link } from "gatsby"
 
 const SkuCard = class extends React.Component {
-  async redirectToCheckout(event, sku, quantity = 1) {
-    event.preventDefault()
-    const { error } = await this.props.stripe.redirectToCheckout({
-      items: [{ sku, quantity }],
-      successUrl: window.location.origin + "/success",
-      cancelUrl: window.location.origin + "/cancel",
-    })
-
-    if (error) {
-      console.warn("Error:", error)
-    }
-  }
 
   render() {
     const sku = this.props.sku

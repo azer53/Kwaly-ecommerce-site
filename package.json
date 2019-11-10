@@ -28,6 +28,7 @@
     "netlify-lambda": "^1.6.3",
     "pngquant-bin": "^5.0.2",
     "prop-types": "^15.7.2",
+    "query-string": "^6.8.3",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-easy-state": "^6.1.3",

@@ -11,7 +11,7 @@ function Cart(props) {
 
   const checkOut = () => {
     const body = {}
-    body.items = state.cart.map(item => {
+    body.items = state.cart.items.map(item => {
       return {
         sku: item.slug.toLowerCase() + "-" + item.selectedSize.toLowerCase(),
         quantity: item.orderQuantity,
@@ -30,7 +30,7 @@ function Cart(props) {
       .then(response => {
         dispatch({
           type: "ADD_PAYMENT_INTENT_ID",
-          value: response.clientSecret,
+          value:  response.paymentIntentId
         })
         navigate("./payment", {
           state: { clientSecret: response.clientSecret },
@@ -41,7 +41,7 @@ function Cart(props) {
   return (
     <div
       className={`${
-        state.cart.length > 0 ? `block` : `hidden`
+        state.cart.items.length > 0 ? `block` : `hidden`
       } absolute md:w-2/6 lg:w-1/6 sm:right-auto right-0 mt-12 bg-gray-200 shadow-lg p-4 sm:-ml-12 sm:mt-10 lg:mt-6 rounded-sm z-50`}
     >
       <button onClick={props.isCartExpanded} className="float-right">
@@ -53,7 +53,7 @@ function Cart(props) {
           <path d="M2.93 17.07A10 10 0 1 1 17.07 2.93 10 10 0 0 1 2.93 17.07zm1.41-1.41A8 8 0 1 0 15.66 4.34 8 8 0 0 0 4.34 15.66zm9.9-8.49L11.41 10l2.83 2.83-1.41 1.41L10 11.41l-2.83 2.83-1.41-1.41L8.59 10 5.76 7.17l1.41-1.41L10 8.59l2.83-2.83 1.41 1.41z" />
         </svg>
       </button>
-      {state.cart.map(item => {
+      {state.cart.items.map(item => {
         return (
           <div
             className="border-b-2 pb-2 mt-2"
