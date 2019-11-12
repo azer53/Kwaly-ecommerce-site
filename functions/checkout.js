@@ -32,7 +32,7 @@ const formatMetadata = (cart) => {
   let metadata = {};
   // reformat the cart items into metadata
   cart.items.forEach((element, index, array) => {
-    metadata[element.sku] = element.orderQuantity;
+    metadata["item-"+element.sku] = element.orderQuantity;
   });
 
   metadata["shippingOption"] = cart.shippingOption;
