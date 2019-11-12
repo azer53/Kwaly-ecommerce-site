@@ -60,27 +60,6 @@ function CheckoutForm(props) {
           dispatch({type: "CLEAR_CART", value: ""});
         }
     })
-
-    // // handle card
-    // switch (selectedCard) {
-    //   case "debit":
-    //       handleBancontactPayment(formData, props.stripe, state.cart);
-    //       dispatch({type: "CLEAR_CART", value: ""});
-    //     break;
-    //   case "credit":
-    //       const response = await handleCreditCardPayment(formData, props.stripe, state.cart);
-    //       if(response.paymentIntent){
-    //         navigate("./success")
-    //         dispatch({type: "CLEAR_CART", value: ""})
-    //       }
-    //       else{
-    //         alert("Woops, something went wrong with your credit card!");
-    //       }
-    //     break;
-    //   default:
-    //     break;
-    // }
-
     setloadingText("Redirecting");
     
     setTimeout(() => {
