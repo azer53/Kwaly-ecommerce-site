@@ -25,37 +25,61 @@ function CheckoutForm(props) {
 
   const onSubmit = async(formData) => {
     setIsLoading(true);
-    formData.clientSecret = props.clientSecret;
-    
+    const body = { uuid: props.uuid, formData: formData, cart: state.cart, selectedCard: selectedCard}
     // update shipping depending on chosen method
     // add metadata to reflect the items in the cart
-    setloadingText("Setting Shipping details");
-    const paymentIntentResponse = await updatePaymentIntent(state.cart, state.paymentIntentId);
-    if (paymentIntentResponse.status !== 200) {
-      alert("There was an error intitating your payment. If the problem persists, contact admin@kwaly.be")
-      return;
-    }
+    // setloadingText("Setting Shipping details");
+    // //const paymentIntentResponse = await updatePaymentIntent(state.cart, state.paymentIntentId, formData);
+
+    // if (paymentIntentResponse.status !== 200) {
+    //   alert("There was an error intitating your payment. If the problem persists, contact admin@kwaly.be")
+    //   setIsLoading(false);
+    //   return;
+    // }
 
     setloadingText("Handling payment");
-    // handle card
-    switch (selectedCard) {
-      case "debit":
-          handleBancontactPayment(formData, props.stripe, state.cart);
+    const payment = await fetch('/.netlify/functions/checkout', {
+      method: 'POST',
+      body: JSON.stringify(body)
+    })
+    
+    payment.json().then((data)=>{
+      if(data.paymentIntent){
+          handleCreditCardPayment(data.paymentIntent, props.stripe).then((response)=>{
+            if(response.error){
+              alert("Woops, something went wrong with your credit card! Try again or contact admin@kwaly.be");
+            }
+            else{
+              navigate("./success");
+              dispatch({type: "CLEAR_CART", value: ""});
+            }
+          })
+        }
+        if(data.source){
+          navigate(data.source.redirect.url);
           dispatch({type: "CLEAR_CART", value: ""});
-        break;
-      case "credit":
-          const response = await handleCreditCardPayment(formData, props.stripe, state.cart);
-          if(response.paymentIntent){
-            navigate("./success")
-            dispatch({type: "CLEAR_CART", value: ""})
-          }
-          else{
-            alert("Woops, something went wrong with your credit card!");
-          }
-        break;
-      default:
-        break;
-    }
+        }
+    })
+
+    // // handle card
+    // switch (selectedCard) {
+    //   case "debit":
+    //       handleBancontactPayment(formData, props.stripe, state.cart);
+    //       dispatch({type: "CLEAR_CART", value: ""});
+    //     break;
+    //   case "credit":
+    //       const response = await handleCreditCardPayment(formData, props.stripe, state.cart);
+    //       if(response.paymentIntent){
+    //         navigate("./success")
+    //         dispatch({type: "CLEAR_CART", value: ""})
+    //       }
+    //       else{
+    //         alert("Woops, something went wrong with your credit card!");
+    //       }
+    //     break;
+    //   default:
+    //     break;
+    // }
 
     setloadingText("Redirecting");
     
@@ -65,7 +89,7 @@ function CheckoutForm(props) {
   }
 
   return (
-    <LoadingOverlay active={isLoading} spinner={<ClimbingBoxLoader/>} text={loadingText} fadeSpeed="1000" >
+    <LoadingOverlay active={isLoading} spinner={<ClimbingBoxLoader/>} text={loadingText} fadeSpeed={1000} >
       <form onSubmit={handleSubmit(onSubmit)} className="">
         <div>
           <h2 className="text-karla-uppercase text-lg font-bold my-4 pb-2 border-b-2">
@@ -91,7 +115,7 @@ function CheckoutForm(props) {
                 ref={register({ required: true })}
               ></input>
               <label className="pl-2" htmlFor="BE">
-                Postal delivery in Belgium + €5.00{" "}
+                Postal delivery in Belgium + €3.95{" "}
               </label>
             </div>
             <div className="my-1">

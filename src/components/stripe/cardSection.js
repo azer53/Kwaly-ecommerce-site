@@ -56,12 +56,12 @@ export default function CardSection(props) {
               setIsCreditSelected(!isCreditSelected)
               setIsDebitSelected(!isDebitSelected)
             }}
-            value="debit"
+            value="bancontact"
             type="radio"
             id="debitCard"
           />
           <label className="pl-2" htmlFor="debitCard">
-            Pay by debit card (Maestro)
+            Pay with Bancontact
           </label>
         </div>
       </fieldset>

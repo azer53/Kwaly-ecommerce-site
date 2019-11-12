@@ -30,7 +30,7 @@ exports.handler = async (event, context, callback) => {
     // values are in cents -> 50 = 5eur
     switch (cart.shippingOption) {
       case "BE":
-        shippingPrice = 500
+        shippingPrice = 395
         break
       case "NL":
         shippingPrice = 900
@@ -38,7 +38,7 @@ exports.handler = async (event, context, callback) => {
       default:
         break
     }
-
+    console.log(data.paymentIntentId);
     stripe.paymentIntents.retrieve(data.paymentIntentId, function(
       err,
       paymentIntent
@@ -62,10 +62,21 @@ exports.handler = async (event, context, callback) => {
           newTotalPrice -= paymentIntent.metadata.shippingPrice;
         }
 
+        const fullName = data.shipping.fName + " " + data.shipping.lName
       stripe.paymentIntents.update(
         paymentIntent.id,
         {
           amount:newTotalPrice,
+          shipping: {
+            address: {
+              line1: data.shipping.street,
+              city: data.shipping.city,
+              country: data.shipping.country,
+              postal_code: data.shipping.postal,
+            },
+            name: fullName,
+          },
+          receipt_email: data.shipping.email,
           metadata: body,
         },
         function(err, paymentIntent) {

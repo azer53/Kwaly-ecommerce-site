@@ -49,7 +49,7 @@ function reducer(state, action) {
       state.cart.shippingOption = action.value
       switch (action.value) {
         case "BE":
-          state.cart.shippingPrice = 5
+          state.cart.shippingPrice = 3.95
           break
         case "NL":
           state.cart.shippingPrice = 9

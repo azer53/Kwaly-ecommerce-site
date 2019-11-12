@@ -5,15 +5,12 @@ import SEO from "../components/seo"
 import { StripeProvider, Elements } from 'react-stripe-elements';
 import InjectedCheckoutForm from '../components/stripe/checkoutForm'
 import CheckoutSummary from "../components/checkoutSummary";
-//import AddressSection from "../components/stripe/addressSection"
-
-//import ShippingSection from "../components/stripe/shippingSection"
 
 
 const PaymentPage = (props) => {
 
 
-    if (!props.location.state || !props.location.state.clientSecret) {
+    if (!props.location.state || !props.location.state.uuid) {
         return (
             <Redirect to="/shop" noThrow />
         )
@@ -34,7 +31,7 @@ const PaymentPage = (props) => {
                                     <CheckoutSummary></CheckoutSummary>
                                 </div>
                                 <div className="flex md:w-2/3">
-                                    <InjectedCheckoutForm clientSecret={props.location.state.clientSecret} />
+                                    <InjectedCheckoutForm clientSecret={props.location.state.uuid} />
                                 </div>
                             </div>
                         </Elements>
