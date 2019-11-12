@@ -82,9 +82,7 @@ const sendEmail = async (email, name, emailTemplateData) => {
     },
     template_id: "d-e6dd90a25ef54e76be7e781b3ac9e238",
   }
-  request.headers = {
-    authorization: "Bearer " + process.env.SENDGRID_API_KEY,
-  }
+
   request.body = data
   console.log("-- request body starts here --")
   console.log(JSON.stringify(request.body))
