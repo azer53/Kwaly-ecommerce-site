@@ -11,36 +11,9 @@ function Cart(props) {
   const dispatch = useContext(GlobalDispatchContext)
 
   const checkOut = () => {
-    // const body = {}
-    // body.items = state.cart.items.map(item => {
-    //   return {
-    //     sku: item.slug.toLowerCase() + "-" + item.selectedSize.toLowerCase(),
-    //     quantity: item.orderQuantity,
-    //   }
-    // })
-    // fetch("/.netlify/functions/checkout", {
-    //   method: "POST",
-    //   body: JSON.stringify(body),
-    //   headers: new Headers({
-    //     "Content-Type": "application/json",
-    //   }),
-    // })
-    //   .then(res => {
-    //     return res.json()
-    //   })
-    //   .then(response => {
-    //     dispatch({
-    //       type: "ADD_PAYMENT_INTENT_ID",
-    //       value:  response.paymentIntentId
-    //     })
-    //     navigate("./payment", {
-    //       state: { clientSecret: response.clientSecret },
-    //     })
-    //   })
-
-            navigate("./payment", {
-          state: { uuid: uuid() },
-        })
+    navigate("./payment", {
+      state: { uuid: uuid() },
+    })
   }
 
   return (
