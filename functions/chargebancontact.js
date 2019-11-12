@@ -16,7 +16,8 @@ exports.handler = async (event, context, callback) => {
 
         }
 
-        const data = JSON.parse(event.body)
+        const data = JSON.parse(event.body);
+        console.log(data);
         console.log(data.type);
         if(data.type === "source.chargeable"){
             stripe.charges.create({
