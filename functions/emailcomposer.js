@@ -117,7 +117,19 @@ exports.handler = async (event, context) => {
     case "payment_intent.succeeded":
       console.log("-- Entering payment intent succeeded --")
 
-      const shippingOption = requestBody.data.object.metadata["shippingOption"]
+      
+
+    case "charge.succeeded":
+      console.log("-- Entering charge succeeded --")
+      break
+    default:
+      return {
+        statuscode: 200,
+        body: "Bad action type",
+      }
+
+  }
+  const shippingOption = requestBody.data.object.metadata["shippingOption"]
       // get the sku data from the keys, but only the items, hence the filter
       const filteredItems = Object.keys(
         requestBody.data.object.metadata
@@ -154,15 +166,4 @@ exports.handler = async (event, context) => {
         requestBody.data.object.shipping.name,
         templateData
       )
-
-    case "charge.succeeded":
-      console.log("charge")
-      break
-    default:
-      return {
-        statuscode: 200,
-        body: "Bad action type",
-      }
-      break
-  }
 }
