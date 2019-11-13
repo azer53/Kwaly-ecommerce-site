@@ -9,16 +9,16 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY)
 client.setApiKey(process.env.SENDGRID_API_KEY)
 
 const formatTemplateData = async (items, shippingOption) => {
-  let returnObject = { total: 0, items: [] };
+  let returnObject = { total: 0, items: [] }
 
   for (let index = 0; index < items.length; index++) {
     const sku = await stripe.skus.retrieve(items[index].sku)
-    returnObject.total += (sku.price / 100) * items[index].orderQuantity;
+    returnObject.total += (sku.price / 100) * items[index].orderQuantity
     returnObject.items.push({
       displayName: sku.id,
       price: sku.price / 100,
       orderQuantity: items[index].orderQuantity,
-    });
+    })
   }
 
   // TODO - get shipping values from contentful
@@ -50,7 +50,7 @@ const formatTemplateData = async (items, shippingOption) => {
       break
   }
 
-  return returnObject;
+  return returnObject
 }
 
 const sendEmail = async (email, name, emailTemplateData) => {
@@ -69,7 +69,7 @@ const sendEmail = async (email, name, emailTemplateData) => {
             name: name,
           },
         ],
-        dynamic_template_data: emailTemplateData
+        dynamic_template_data: emailTemplateData,
       },
     ],
     from: {
@@ -109,61 +109,68 @@ const sendEmail = async (email, name, emailTemplateData) => {
 }
 
 exports.handler = async (event, context) => {
-  const requestBody = JSON.parse(event.body)
-
-  console.log(requestBody.type)
-  const data = {}
+  const requestBody = JSON.parse(event.body);
+  const data = {};
+  let metadata;
+  let shippingDetails;
+  let emailTo;
   switch (requestBody.type) {
     case "payment_intent.succeeded":
       console.log("-- Entering payment intent succeeded --")
 
-      
+      metadata = requestBody.data.object.metadata
+      shippingDetails = requestBody.data.object.shipping
+      emailTo = requestBody.data.object.receipt_email;
+      break;
 
     case "charge.succeeded":
       console.log("-- Entering charge succeeded --")
-      break
+
+      metadata = requestBody.data.object.source.metadata;
+      shippingDetails = requestBody.data.object.source.source_order.shipping;
+      emailTo = requestBody.data.object.source.source_order.email;
+      break;
+
     default:
       return {
         statuscode: 200,
         body: "Bad action type",
       }
-
   }
-  const shippingOption = requestBody.data.object.metadata["shippingOption"]
-      // get the sku data from the keys, but only the items, hence the filter
-      const filteredItems = Object.keys(
-        requestBody.data.object.metadata
-      ).filter((element) => {
-        return element.includes("item-");
-      })
+  const shippingOption = metadata["shippingOption"]
+  // get the sku data from the keys, but only the items, hence the filter
+  const filteredItems = Object.keys(metadata).filter(element => {
+    return element.includes("item-")
+  })
 
-      //restructure the filtered items and return an object with key/value pairing for the sku and ordered amount
-      const reformatedItems = filteredItems.map(element => {
-        return {
-          sku: element.replace("item-", ""),
-          orderQuantity: requestBody.data.object.metadata[element],
-        }
-      })
+  //restructure the filtered items and return an object with key/value pairing for the sku and ordered amount
+  const reformatedItems = filteredItems.map(element => {
+    return {
+      sku: element.replace("item-", ""),
+      orderQuantity: metadata[element],
+    }
+  })
 
-      // go to stripe and get the sku's with prices and shipping
-      const templateDataItems = await formatTemplateData(
-        reformatedItems,
-        shippingOption
-      );
+  // go to stripe and get the sku's with prices and shipping
+  const templateDataItems = await formatTemplateData(
+    reformatedItems,
+    shippingOption
+  )
 
-      const templateData = {
-        subject: "Order Confirmation",
-        total: templateDataItems.total,
-        items: templateDataItems.items,
-        receipt: true,
-        name: requestBody.data.object.shipping.name,
-        address01: requestBody.data.object.shipping.address.line1,
-        city: requestBody.data.object.shipping.address.city,
-        zip: requestBody.data.object.shipping.address.postal_code,
-      }
-      return sendEmail(
-        requestBody.data.object.receipt_email,
-        requestBody.data.object.shipping.name,
-        templateData
-      )
+  const templateData = {
+    subject: "Order Confirmation",
+    total: templateDataItems.total,
+    items: templateDataItems.items,
+    receipt: true,
+    name: shippingDetails.name,
+    address01: shippingDetails.address.line1,
+    city: shippingDetails.address.city,
+    zip: shippingDetails.address.postal_code,
+  }
+  
+  return sendEmail(
+    emailTo,
+    shippingDetails.name,
+    templateData
+  )
 }
