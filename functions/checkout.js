@@ -105,7 +105,7 @@ exports.handler = async (event, context, callback) => {
         },
         metadata: metadata,
         redirect: {
-          return_url: "http://localhost:8000/success",
+          return_url: process.env.ENVIRONMENT_URL + "/success",
         },
       });
       response = {source: source};
