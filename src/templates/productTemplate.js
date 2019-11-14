@@ -126,7 +126,7 @@ function ProductTemplate({ data }) {
             </button>
           </div>
           <div
-            className="my-8"
+            className="my-8 markdown"
             dangerouslySetInnerHTML={{
               __html: product.description.childMarkdownRemark.html,
             }}

@@ -5,6 +5,7 @@
   "version": "0.1.0",
   "author": "Kyle Mathews <mathews.kyle@gmail.com>",
   "dependencies": {
+    "@contentful/rich-text-react-renderer": "^13.4.0",
     "@sendgrid/client": "^6.4.0",
     "gatsby": "^2.15.34",
     "gatsby-background-image": "^0.8.15",
@@ -46,6 +47,7 @@
     "webpack": "^4.41.0"
   },
   "devDependencies": {
+    "postcss-nesting": "^7.0.1",
     "prettier": "^1.18.2",
     "tailwindcss": "^1.1.2"
   },
