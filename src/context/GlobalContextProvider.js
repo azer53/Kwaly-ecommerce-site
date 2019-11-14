@@ -52,7 +52,7 @@ function reducer(state, action) {
           state.cart.shippingPrice = 3.95
           break
         case "NL":
-          state.cart.shippingPrice = 9
+          state.cart.shippingPrice = 7
           break
         case "SN":
           state.cart.shippingPrice = 0

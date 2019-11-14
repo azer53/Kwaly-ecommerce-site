@@ -34,10 +34,10 @@ const formatTemplateData = async (items, shippingOption) => {
     case "NL":
       returnObject.items.push({
         displayName: "Shipping Netherlands",
-        price: 9.0,
+        price: 7.0,
         orderQuantity: "",
       })
-      returnObject.total += 9.0
+      returnObject.total += 7.0
       break
     case "SN":
       returnObject.items.push({

@@ -107,7 +107,7 @@ function CheckoutForm(props) {
                 ref={register({ required: true })}
               ></input>
               <label className="pl-2" htmlFor="NL">
-                Postal delivery to The Netherlands + €9.00{" "}
+                Postal delivery to The Netherlands + €7.00{" "}
               </label>
             </div>
             <div className="my-1">

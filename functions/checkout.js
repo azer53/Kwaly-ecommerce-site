@@ -20,7 +20,7 @@ const calculateOrderAmount = async (items, shippingOption) => {
       total += 395
       break
     case "NL":
-      total += 900
+      total += 700
       break
     default:
       break
