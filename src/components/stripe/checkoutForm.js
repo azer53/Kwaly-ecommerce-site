@@ -4,28 +4,35 @@ import { injectStripe } from "react-stripe-elements"
 import useForm from "react-hook-form"
 import LoadingOverlay from "react-loading-overlay"
 import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader"
-import { GlobalDispatchContext, GlobalStateContext } from "../../context/GlobalContextProvider"
+import {
+  GlobalDispatchContext,
+  GlobalStateContext,
+} from "../../context/GlobalContextProvider"
 import { handleCreditCardPayment } from "../../utils/paymentService"
 import { navigate } from "@reach/router"
-
 
 function CheckoutForm(props) {
   const ref = React.createRef()
   const { register, handleSubmit, errors, getValues } = useForm()
   const [isLoading, setIsLoading] = useState(false)
   const [loadingText, setloadingText] = useState()
-  const [selectedCard, setSelectedCard] = useState("credit");
-  const dispatch = useContext(GlobalDispatchContext);
-  const state = useContext(GlobalStateContext);
+  const [selectedCard, setSelectedCard] = useState("credit")
+  const dispatch = useContext(GlobalDispatchContext)
+  const state = useContext(GlobalStateContext)
 
   const updateShipping = () => {
     const formValues = getValues()
     dispatch({ type: "UPDATE_SHIPPING", value: formValues.shipping })
   }
 
-  const onSubmit = async(formData) => {
-    setIsLoading(true);
-    const body = { uuid: props.uuid, formData: formData, cart: state.cart, selectedCard: selectedCard}
+  const onSubmit = async formData => {
+    setIsLoading(true)
+    const body = {
+      uuid: props.uuid,
+      formData: formData,
+      cart: state.cart,
+      selectedCard: selectedCard,
+    }
     // update shipping depending on chosen method
     // add metadata to reflect the items in the cart
     // setloadingText("Setting Shipping details");
@@ -37,38 +44,46 @@ function CheckoutForm(props) {
     //   return;
     // }
 
-    setloadingText("Handling payment");
-    const payment = await fetch('/.netlify/functions/checkout', {
-      method: 'POST',
-      body: JSON.stringify(body)
+    setloadingText("Handling payment")
+    const payment = await fetch("/.netlify/functions/checkout", {
+      method: "POST",
+      body: JSON.stringify(body),
     })
-    
-    payment.json().then((data)=>{
-      if(data.paymentIntent){
-          handleCreditCardPayment(data.paymentIntent, props.stripe).then((response)=>{
-            if(response.error){
-              alert("Woops, something went wrong with your credit card! Try again or contact admin@kwaly.be");
+
+    payment.json().then(data => {
+      if (data.paymentIntent) {
+        handleCreditCardPayment(data.paymentIntent, props.stripe).then(
+          response => {
+            if (response.error) {
+              alert(
+                "Woops, something went wrong with your credit card! Try again or contact admin@kwaly.be"
+              )
+            } else {
+              navigate("./success")
+              dispatch({ type: "CLEAR_CART", value: "" })
             }
-            else{
-              navigate("./success");
-              dispatch({type: "CLEAR_CART", value: ""});
-            }
-          })
-        }
-        if(data.source){
-          navigate(data.source.redirect.url);
-          dispatch({type: "CLEAR_CART", value: ""});
-        }
+          }
+        )
+      }
+      if (data.source) {
+        navigate(data.source.redirect.url)
+        dispatch({ type: "CLEAR_CART", value: "" })
+      }
     })
-    setloadingText("Redirecting");
-    
+    setloadingText("Redirecting")
+
     setTimeout(() => {
-      setIsLoading(false);
-    }, 500); 
+      setIsLoading(false)
+    }, 500)
   }
 
   return (
-    <LoadingOverlay active={isLoading} spinner={<ClimbingBoxLoader/>} text={loadingText} fadeSpeed={1000} >
+    <LoadingOverlay
+      active={isLoading}
+      spinner={<ClimbingBoxLoader />}
+      text={loadingText}
+      fadeSpeed={1000}
+    >
       <form onSubmit={handleSubmit(onSubmit)} className="">
         <div>
           <h2 className="text-karla-uppercase text-lg font-bold my-4 pb-2 border-b-2">
@@ -314,8 +329,23 @@ function CheckoutForm(props) {
               )}
             </div>
           </div>
+          <div class="md:flex md:items-center mb-6">
+            <label class="block text-gray-700 font-bold">
+              <input name="terms" ref={register({ required: true })} class="mr-2 leading-tight" type="checkbox" />
+              <span class="text-sm">I've read and agree to the <a target="_blank" className="border-b-2 border-gray-500" href="/termsandconditions">Terms and conditions</a></span>
+              {errors.terms && errors.terms.type === "required" && (
+                <p className="text-red-500 text-xs italic">
+                  Please agree to the terms and conditions before making a purchase
+                </p>
+              )}
+            </label>
+          </div>
         </div>
-        <CardSection reference={ref} errors={errors} setSelectedCard={setSelectedCard} />
+        <CardSection
+          reference={ref}
+          errors={errors}
+          setSelectedCard={setSelectedCard}
+        />
       </form>
     </LoadingOverlay>
   )

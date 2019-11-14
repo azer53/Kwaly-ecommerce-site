@@ -7,8 +7,6 @@ export default function Delivery() {
         id="76d98801-3a87-461e-b488-021b663cdcb4"
         data-name="Layer 1"
         xmlns="http://www.w3.org/2000/svg"
-        width="1056.29"
-        height="808.9"
         viewBox="0 0 1056.29 808.9"
         className="h-64"
       >

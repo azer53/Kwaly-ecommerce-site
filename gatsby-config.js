@@ -32,6 +32,14 @@ module.exports = {
       },
     },
     {
+      resolve: "gatsby-plugin-react-svg",
+      options: {
+        rule: {
+          include: /images/
+        }
+      }
+    },
+    {
       resolve: "gatsby-background-image",
       options: {
         // add your own characters to escape, replacing the default ':/'
