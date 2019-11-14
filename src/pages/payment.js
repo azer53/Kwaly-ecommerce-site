@@ -27,7 +27,7 @@ const PaymentPage = (props) => {
                     <div className="">
                         <Elements>
                             <div className="flex flex-col md:flex-row mx-auto w-10/12 xl:w-8/12">
-                                <div className="flex md:w-1/3 pr-6 rounded shadow-xl bg-gray-100 p-8 mb-6 md:mb-0 md:mr-6 table">
+                                <div className="flex md:w-1/3 pr-6 rounded shadow-xl bg-gray-100 p-8 mb-6 md:mb-0 md:mr-6 table w-full">
                                     <CheckoutSummary></CheckoutSummary>
                                 </div>
                                 <div className="flex md:w-2/3">

@@ -5,7 +5,7 @@ import useForm from "react-hook-form"
 import LoadingOverlay from "react-loading-overlay"
 import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader"
 import { GlobalDispatchContext, GlobalStateContext } from "../../context/GlobalContextProvider"
-import { handleBancontactPayment, handleCreditCardPayment, updatePaymentIntent } from "../../utils/paymentService"
+import { handleCreditCardPayment } from "../../utils/paymentService"
 import { navigate } from "@reach/router"
 
 

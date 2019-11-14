@@ -12,8 +12,6 @@ import { useStaticQuery, graphql } from "gatsby"
 import Navigation from "./navigation"
 import Footer from "./footer"
 
-
-
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
@@ -25,14 +23,11 @@ const Layout = ({ children }) => {
     }
   `)
 
-  
-
   return (
     <div className="leading-normal tracking-normal">
       <Navigation siteTitle={data.site.siteMetadata.title} />
       <main>{children}</main>
       <Footer siteTitle={data.site.siteMetadata.title} />
-
     </div>
   )
 }

@@ -32,9 +32,9 @@ function Navigation(){
                         <Link to={`/brand`} activeClassName="border-b-2 mt-1" className="pb-1 block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-500 mx-3 lg:mx-4">
                             BRAND
       </Link>
-                        <Link to={`/page-2`} activeClassName="border-b-2 mt-1" className="pb-1 block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-500 mx-3 lg:mx-4">
-                            SOCIAL
-      </Link>
+                        <a href={`https://www.instagram.com/kwaly_/`} className="pb-1 block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-500 mx-3 lg:mx-4">
+                            INSTA
+      </a>
                         <button onClick={() => setIsCartExpanded(!isCartExpanded)} className="pb-1 block mt-4 lg:inline-block lg:mt-0 text-gray-800 hover:text-gray-500 mx-3 lg:mx-4 outline-none">CART<span className={`${state.cart.items.length > 0 ? `inline` : `hidden`} rounded-full bg-indigo-200 uppercase px-2 py-1 text-xs font-bold ml-1`}>{state.cart.totalItems}</span></button>
                         <div className={`${isCartExpanded ? `block` : `hidden`}`}>
                             <Cart isCartExpanded={() => { setIsCartExpanded(false)}}></Cart>
