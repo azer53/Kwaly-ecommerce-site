@@ -5,7 +5,6 @@ import DugiProfile from "../components/images/dugiProfile.js"
 import RaffiProfile from "../components/images/raffiProfile.js"
 import HeaderLarge from "../components/images/header-brand"
 import HeaderMobile from "../components/images/header-mobile"
-import EnvIcons from "../components/images/environment-icons"
 
 export default function Brand() {
   return (
@@ -80,10 +79,7 @@ export default function Brand() {
           </section>
         </div>
       </div>
-      <div>
-        <h2 className="text-xl text-center mx-auto p-8">Standards we support with our clothing:</h2>
-      <EnvIcons></EnvIcons>
-      </div>
+
     </Layout>
   )
 }

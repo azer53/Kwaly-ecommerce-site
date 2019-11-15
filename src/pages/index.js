@@ -6,7 +6,6 @@ import BlackShirt from "../components/images/black-shirt.js"
 import PinkShirt from "../components/images/pink-shirt.js"
 import InstaFeed from "../components/instaFeed.js"
 import { Link } from "gatsby"
-import EnvIcons from "../components/images/environment-icons"
 
 class IndexPage extends React.Component {
   constructor(props) {
@@ -69,12 +68,7 @@ class IndexPage extends React.Component {
             />
           </div>
         </section>
-        <div>
-          <h2 className="text-xl text-center mx-auto p-8">
-            Standards we support with our clothing:
-          </h2>
-          <EnvIcons></EnvIcons>
-        </div>
+
       </Layout>
     )
   }
