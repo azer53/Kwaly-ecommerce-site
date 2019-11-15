@@ -13,6 +13,7 @@ class Footer extends React.Component {
           <Link to="/termsandconditions" className="hover:underline">Terms & Conditions</Link>
         </div>
         <div className="p-8">
+        <span className="text-gray-600 italic">We Accept:</span>
           <div className="flex justify-center">
             <div className="w-24">
               <VisaLogo></VisaLogo>
