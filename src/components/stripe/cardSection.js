@@ -1,7 +1,8 @@
 import React, { useState, useContext } from "react"
 import { CardElement } from "react-stripe-elements"
 import { GlobalStateContext } from "../../context/GlobalContextProvider"
-
+import VisaLogo from "../../components/images/visaLogo"
+import MasterCardLogo from "../../images/mastercardLogo.svg"
 
 export default function CardSection(props) {
   const [isCreditSelected, setIsCreditSelected] = useState(true)
@@ -30,7 +31,7 @@ export default function CardSection(props) {
         Card Details
       </h2>
       <fieldset>
-        <div className="my-1">
+        <div className="my-4">
           <input
             name="cardOption"
             checked={isCreditSelected}
@@ -44,9 +45,16 @@ export default function CardSection(props) {
             id="creditCard"
           />
           <label className="pl-2" htmlFor="creditCard">
-            Pay by credit card (VISA, Master Card,...)
+            Pay by credit card (VISA, Master Card,...) 
           </label>
+          <div className="w-24 p-8 inline-block">
+          <VisaLogo></VisaLogo> 
+          </div>
+          <div className="w-24 p-8 inline-block">
+          <MasterCardLogo></MasterCardLogo>
+          </div>
         </div>
+
         <div className="my-1">
           <input
             name="cardOption"

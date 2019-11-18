@@ -30,7 +30,6 @@ const data  = useStaticQuery(graphql`
       return (
         <Img
         fluid={data.visaLogo.childImageSharp.fluid}
-        placeholderClassName=""
       />
       )
   }
