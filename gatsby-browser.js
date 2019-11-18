@@ -15,3 +15,21 @@ export const onClientEntry = () => {
     console.log(`# IntersectionObserver is polyfilled!`)
   }
 }
+
+export const onInitialClientRender = () => {
+  document.addEventListener("scroll", function() {
+
+    let navbar = document.getElementById("nav-content")
+
+    var sticky = navbar.offsetTop;
+
+    if (window.pageYOffset >= sticky) {
+      navbar.classList.add("sticky")
+      navbar.classList.add("border-b")
+    } 
+    if(window.pageYOffset === 0) {
+      navbar.classList.remove("sticky")
+      navbar.classList.remove("border-b")
+    }
+  })
+}

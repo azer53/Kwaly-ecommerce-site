@@ -13,6 +13,18 @@
 
  @import url('https://fonts.googleapis.com/css?family=Karla&display=swap');
 
+ .sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+
+}
+
+#nav-content {
+  transition: padding .1s ease-out;
+  
+}
+
  .markdown {
   @apply text-lg text-gray-900 leading-normal;
   & > * + *,  & li + li, & li > p + p {

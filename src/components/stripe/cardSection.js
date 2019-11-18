@@ -3,6 +3,7 @@ import { CardElement } from "react-stripe-elements"
 import { GlobalStateContext } from "../../context/GlobalContextProvider"
 import VisaLogo from "../../components/images/visaLogo"
 import MasterCardLogo from "../../images/mastercardLogo.svg"
+import BancontactLogo from "../../images/bancontact-logo.svg"
 
 export default function CardSection(props) {
   const [isCreditSelected, setIsCreditSelected] = useState(true)
@@ -21,8 +22,8 @@ export default function CardSection(props) {
     })
   }
 
-  const onChange = (event)=>{
-    props.setSelectedCard(event.target.value);
+  const onChange = event => {
+    props.setSelectedCard(event.target.value)
   }
 
   return (
@@ -31,46 +32,59 @@ export default function CardSection(props) {
         Card Details
       </h2>
       <fieldset>
-        <div className="my-4">
-          <input
-            name="cardOption"
-            checked={isCreditSelected}
-            onClick={onChange}
-            onChange={() => {
-              setIsCreditSelected(!isCreditSelected)
-              setIsDebitSelected(!isDebitSelected)
-            }}
-            value="credit"
-            type="radio"
-            id="creditCard"
-          />
-          <label className="pl-2" htmlFor="creditCard">
-            Pay by credit card (VISA, Master Card,...) 
-          </label>
-          <div className="w-24 p-8 inline-block">
-          <VisaLogo></VisaLogo> 
+        <div className="flex content-center my-4">
+          <div>
+            <input
+              name="cardOption"
+              checked={isCreditSelected}
+              onClick={onChange}
+              onChange={() => {
+                setIsCreditSelected(!isCreditSelected)
+                setIsDebitSelected(!isDebitSelected)
+              }}
+              value="credit"
+              type="radio"
+              id="creditCard"
+            />
           </div>
-          <div className="w-24 p-8 inline-block">
-          <MasterCardLogo></MasterCardLogo>
+          <div className="inline-block">
+            <label className="pl-2" htmlFor="creditCard">
+              Pay by credit card (VISA, Master Card,...)
+            </label>
+          </div>
+          <div className="w-40 inline-block">
+            <div className="w-8 mx-4 inline-block">
+              <VisaLogo></VisaLogo>
+            </div>
+            <div className="w-8 mx-4 inline-block">
+              <MasterCardLogo></MasterCardLogo>
+            </div>
           </div>
         </div>
 
-        <div className="my-1">
-          <input
-            name="cardOption"
-            checked={isDebitSelected}
-            onClick={onChange}
-            onChange={() => {
-              setIsCreditSelected(!isCreditSelected)
-              setIsDebitSelected(!isDebitSelected)
-            }}
-            value="bancontact"
-            type="radio"
-            id="debitCard"
-          />
-          <label className="pl-2" htmlFor="debitCard">
-            Pay with Bancontact
-          </label>
+        <div className="my-1 flex content-center">
+          <div>
+            <input
+              name="cardOption"
+              checked={isDebitSelected}
+              onClick={onChange}
+              onChange={() => {
+                setIsCreditSelected(!isCreditSelected)
+                setIsDebitSelected(!isDebitSelected)
+              }}
+              value="bancontact"
+              type="radio"
+              id="debitCard"
+            />
+          </div>
+          <div>
+            <label className="pl-2" htmlFor="debitCard">
+              Pay with Bancontact
+            </label>
+          </div>
+          <div className="w-8 mx-4">
+            <BancontactLogo></BancontactLogo>
+          </div>
         </div>
       </fieldset>
       <div
@@ -105,7 +119,9 @@ export default function CardSection(props) {
               : `bg-green-700 hover:bg-green-800`
           } text-karla-uppercase border rounded text-gray-100 p-4 my-4`}
         >
-          Pay €{state.cart.total}{isDebitSelected && " with Bancontact"}{isCreditSelected && " with Credit Card"}
+          Pay €{state.cart.total}
+          {isDebitSelected && " with Bancontact"}
+          {isCreditSelected && " with Credit Card"}
         </button>
       </div>
     </div>

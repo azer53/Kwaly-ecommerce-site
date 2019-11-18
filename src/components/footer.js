@@ -8,7 +8,7 @@ class Footer extends React.Component {
   render() {
     return (
       <div>
-        <div className="border-t">
+        <div className="border-t mx-auto">
           <span className="text-lg block text-center mx-auto p-8">
             Standards we support with our clothing:
           </span>
@@ -17,8 +17,11 @@ class Footer extends React.Component {
         <footer className="bg-gray-200 border-t-2 mt-6 py-10 text-center text-sm">
           <span>©KWALY - {new Date().getYear() + 1900}</span>
           <div className="my-4 text-center">
-            <Link to="/termsandconditions" className="hover:underline">
+            <Link to="/termsandconditions" className="hover:underline mx-4">
               Terms & Conditions
+            </Link>
+            <Link to="/gdpr" className="hover:underline mx-4">
+              Privacy Policy
             </Link>
           </div>
           <div className="p-8">

@@ -25,9 +25,9 @@ const Image = () => {
   `)
 
   return ( 
-    <div className="flex flex-row justify-center">
+    <div className="flex flex-col sm:flex-row justify-center">
     {data.allFile.edges.map(element => {
-    return <Img fluid={element.node.childImageSharp.fluid} placeholderClassName="w-24" className="w-24 mx-8"/>
+    return <Img fluid={element.node.childImageSharp.fluid} placeholderClassName="w-24" className="w-24 mx-auto sm:mx-8"/>
     
     })}
     </div>  
