@@ -1,8 +1,11 @@
 import React from "react"
+import Layout from "../components/layout"
 
 export default function gdpr() {
   return (
-    <div className="markdown">
+    <Layout>
+
+    <div className=" mx-auto w-10/12 sm:w-8/12 markdown">
       <h1>Privacy Policy for Kwaly</h1>
 
       <p>
@@ -167,5 +170,7 @@ export default function gdpr() {
         to its terms.
       </p>
     </div>
+          
+    </Layout>
   )
 }
