@@ -47,10 +47,10 @@
     "sharp": "^0.23.1",
     "stripe": "^7.10.0",
     "uuid": "^3.3.3",
+    "webp-hero": "0.0.0-dev.24",
     "webpack": "^4.41.0"
   },
   "devDependencies": {
-    
     "prettier": "^1.18.2",
     "tailwindcss": "^1.1.2"
   },

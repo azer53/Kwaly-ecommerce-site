@@ -4,8 +4,13 @@ import VisaLogo from "./images/visaLogo"
 import MasterCardLogo from "../images/mastercardLogo.svg"
 import BancontactLogo from "../images/bancontact-logo.svg"
 import EnvIcons from "../components/images/environment-icons"
+import {WebpMachine} from "webp-hero"
+const webpMachine = new WebpMachine()
+
 class Footer extends React.Component {
   render() {
+
+    webpMachine.polyfillDocument()
     return (
       <div>
         <div className="border-t mx-auto">
