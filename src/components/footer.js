@@ -1,18 +1,29 @@
-import React from "react"
+import React, {useEffect} from "react"
 import { Link } from "gatsby"
 import VisaLogo from "./images/visaLogo"
 import MasterCardLogo from "../images/mastercardLogo.svg"
 import BancontactLogo from "../images/bancontact-logo.svg"
 import EnvIcons from "../components/images/environment-icons"
 import {WebpMachine} from "webp-hero"
-const webpMachine = new WebpMachine()
 
-class Footer extends React.Component {
-  render() {
 
-    webpMachine.polyfillDocument()
-    return (
-      <div>
+export default function Footer() {
+
+  useEffect(() => {
+    if(window){
+      const webpMachine = new WebpMachine()
+      webpMachine.polyfillDocument();
+    }
+    return () => {
+      if(window){
+        const webpMachine = new WebpMachine()
+        webpMachine.polyfillDocument();
+      }
+    };
+  }, []);
+
+  return (
+    <div>
         <div className="border-t mx-auto">
           <span className="text-lg block text-center mx-auto p-8">
             Standards we support with our clothing:
@@ -45,8 +56,5 @@ class Footer extends React.Component {
           </div>
         </footer>
       </div>
-    )
-  }
+  )
 }
-
-export default Footer
