@@ -80,6 +80,7 @@ module.exports = {
       options: {
         tailwind: true,
         purgeOnly: [`src/css/style.css`],
+        whitelist: ['nav-bar-sticky']
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality

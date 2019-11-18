@@ -1,9 +1,9 @@
 {
-  "name": "gatsby-starter-default",
+  "name": "kwaly-ecommerce",
   "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
+  "description": "Kwaly Ecommerce website",
   "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "author": "Raphaël Vercruyssen <raphael@kwaly.be>",
   "dependencies": {
     "@contentful/rich-text-react-renderer": "^13.4.0",
     "@sendgrid/client": "^6.4.0",
@@ -30,6 +30,7 @@
     "intersection-observer": "^0.7.0",
     "netlify-lambda": "^1.6.3",
     "pngquant-bin": "^5.0.2",
+    "postcss-nesting": "^7.0.1",
     "prop-types": "^15.7.2",
     "query-string": "^6.8.3",
     "react": "^16.9.0",
@@ -49,7 +50,7 @@
     "webpack": "^4.41.0"
   },
   "devDependencies": {
-    "postcss-nesting": "^7.0.1",
+    
     "prettier": "^1.18.2",
     "tailwindcss": "^1.1.2"
   },

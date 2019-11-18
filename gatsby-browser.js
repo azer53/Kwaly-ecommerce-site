@@ -24,11 +24,11 @@ export const onInitialClientRender = () => {
     var sticky = navbar.offsetTop;
 
     if (window.pageYOffset >= sticky) {
-      navbar.classList.add("sticky")
+      navbar.classList.add("nav-bar-sticky")
       navbar.classList.add("border-b")
     } 
     if(window.pageYOffset === 0) {
-      navbar.classList.remove("sticky")
+      navbar.classList.remove("nav-bar-sticky")
       navbar.classList.remove("border-b")
     }
   })

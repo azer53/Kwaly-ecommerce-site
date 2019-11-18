@@ -13,20 +13,9 @@
 
  @import url('https://fonts.googleapis.com/css?family=Karla&display=swap');
 
- .sticky {
-  position: fixed;
-  top: 0;
-  width: 100%;
-
-}
-
-#nav-content {
-  transition: padding .1s ease-out;
-  
-}
 
  .markdown {
-  @apply text-lg text-gray-900 leading-normal;
+  @apply text-lg text-red-900 leading-normal;
   & > * + *,  & li + li, & li > p + p {
     @apply mt-6;
   }
@@ -71,9 +60,15 @@
   }
 }
 
+.nav-bar-sticky {
+  @apply sticky;
+  top: 0;
+  width: 100%;
+}
+/* goddammit */
  .instaContainer{
    position: relative;
- }
+  }
  .overlay {
   position: absolute;
   top: 0;
