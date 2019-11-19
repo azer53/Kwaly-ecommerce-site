@@ -67,11 +67,11 @@ const sendEmail = async (email, name, emailTemplateData) => {
           {
             email: email,
             name: name,
-          },
-          {
-            email: "orders@kwaly.be",
-            name: "Kwaly Orders"
           }
+        ],
+        bcc:[{
+          email: "orders@kwaly.be"
+        }
         ],
         dynamic_template_data: emailTemplateData,
       },
