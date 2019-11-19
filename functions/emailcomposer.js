@@ -142,6 +142,8 @@ exports.handler = async (event, context) => {
         }
       }
       metadata = requestBody.data.object.source.metadata;
+      console.log("-- metadata --");
+      console.log(metadata);
       shippingDetails = requestBody.data.object.source.source_order.shipping;
       emailTo = requestBody.data.object.source.source_order.email;
       break;
