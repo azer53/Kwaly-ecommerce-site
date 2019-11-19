@@ -4,23 +4,11 @@ import VisaLogo from "./images/visaLogo"
 import MasterCardLogo from "../images/mastercardLogo.svg"
 import BancontactLogo from "../images/bancontact-logo.svg"
 import EnvIcons from "../components/images/environment-icons"
-import {WebpMachine} from "webp-hero"
+
 
 
 export default function Footer() {
 
-  useEffect(() => {
-    if(window){
-      const webpMachine = new WebpMachine()
-      webpMachine.polyfillDocument();
-    }
-    return () => {
-      if(window){
-        const webpMachine = new WebpMachine()
-        webpMachine.polyfillDocument();
-      }
-    };
-  }, []);
 
   return (
     <div>
