@@ -129,8 +129,14 @@ exports.handler = async (event, context) => {
 
     case "charge.succeeded":
       console.log("-- Entering charge succeeded --")
-
-      metadata = requestBody.data.object.source.metadata;
+      // only for bancontact
+      if(requestBody.data.object.payment_method_details.card.brand == "bancontact"){
+        return {
+          statusCode: 200,
+          body: "Charge, but not a Bancontact payment, payment intent should fire"
+        }
+      }
+      metadata = requestBody.data.object.metadata;
       shippingDetails = requestBody.data.object.source.source_order.shipping;
       emailTo = requestBody.data.object.source.source_order.email;
       break;
