@@ -68,6 +68,10 @@ const sendEmail = async (email, name, emailTemplateData) => {
             email: email,
             name: name,
           },
+          {
+            email: "orders@kwaly.be",
+            name: "Kwaly Orders"
+          }
         ],
         dynamic_template_data: emailTemplateData,
       },
