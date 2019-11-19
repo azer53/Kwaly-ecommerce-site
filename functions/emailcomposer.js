@@ -141,7 +141,7 @@ exports.handler = async (event, context) => {
           body: "Charge, but not a Bancontact payment, payment intent should fire"
         }
       }
-      metadata = requestBody.data.object.metadata;
+      metadata = requestBody.data.object.source.metadata;
       shippingDetails = requestBody.data.object.source.source_order.shipping;
       emailTo = requestBody.data.object.source.source_order.email;
       break;
