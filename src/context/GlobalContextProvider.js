@@ -39,6 +39,12 @@ function reducer(state, action) {
       if (state.cart.items[indexOfItem].orderQuantity === 0)
         state.cart.items.splice(indexOfItem, 1)
 
+      if(state.cart.items.length == 0){
+        state.cart.shippingOption = undefined;
+        state.cart.shippingPrice = undefined;
+      }
+
+
       calcTotals(state.cart)
       updateLocalStorage(state)
       return { ...state }

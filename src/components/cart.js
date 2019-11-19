@@ -60,6 +60,25 @@ function Cart(props) {
           </div>
         )
       })}
+      {
+        state.cart.shippingOption && state.cart.shippingOption !== "SN" &&
+        <div
+        className="border-b-2 pb-2 mt-2"
+      >
+        <div>
+          <span className="font-bold text-karla-uppercase">
+            Shipping: {state.cart.shippingOption}
+          </span>
+        </div>
+        <div className="mb-2">
+          
+          <span className="float-right font-bold">
+            €{state.cart.shippingPrice}
+          </span>
+        </div>
+      </div>
+      }
+
       <div className="mt-1 pt-2">
         Total:{" "}
         <span className="float-right font-bold">€{state.cart.total}</span>
