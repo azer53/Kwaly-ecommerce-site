@@ -71,6 +71,9 @@ const sendEmail = async (email, name, emailTemplateData) => {
         ],
         bcc:[{
           email: "orders@kwaly.be"
+        },
+        {
+          email: "raphael@kwaly.be"
         }
         ],
         dynamic_template_data: emailTemplateData,

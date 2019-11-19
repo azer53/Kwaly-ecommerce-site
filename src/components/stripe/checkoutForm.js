@@ -26,6 +26,12 @@ function CheckoutForm(props) {
   }
 
   const onSubmit = async formData => {
+    try{
+
+    }
+    catch(err){
+      alert("We're having difficulties processing your payment. Sorry about that, please contact orders@kwaly.be");
+    }
     setIsLoading(true)
     const body = {
       uuid: props.uuid,
