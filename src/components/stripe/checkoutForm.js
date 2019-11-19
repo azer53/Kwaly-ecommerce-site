@@ -26,58 +26,57 @@ function CheckoutForm(props) {
   }
 
   const onSubmit = async formData => {
-    try{
+    try {
+      setIsLoading(true)
+      const body = {
+        uuid: props.uuid,
+        formData: formData,
+        cart: state.cart,
+        selectedCard: selectedCard,
+      }
+      // update shipping depending on chosen method
+      // add metadata to reflect the items in the cart
+      // setloadingText("Setting Shipping details");
+      // //const paymentIntentResponse = await updatePaymentIntent(state.cart, state.paymentIntentId, formData);
 
-    }
-    catch(err){
-      alert("We're having difficulties processing your payment. Sorry about that, please contact orders@kwaly.be");
-    }
-    setIsLoading(true)
-    const body = {
-      uuid: props.uuid,
-      formData: formData,
-      cart: state.cart,
-      selectedCard: selectedCard,
-    }
-    // update shipping depending on chosen method
-    // add metadata to reflect the items in the cart
-    // setloadingText("Setting Shipping details");
-    // //const paymentIntentResponse = await updatePaymentIntent(state.cart, state.paymentIntentId, formData);
+      // if (paymentIntentResponse.status !== 200) {
+      //   alert("There was an error intitating your payment. If the problem persists, contact admin@kwaly.be")
+      //   setIsLoading(false);
+      //   return;
+      // }
 
-    // if (paymentIntentResponse.status !== 200) {
-    //   alert("There was an error intitating your payment. If the problem persists, contact admin@kwaly.be")
-    //   setIsLoading(false);
-    //   return;
-    // }
+      setloadingText("Handling payment")
+      const payment = await fetch("/.netlify/functions/checkout", {
+        method: "POST",
+        body: JSON.stringify(body),
+      })
 
-    setloadingText("Handling payment")
-    const payment = await fetch("/.netlify/functions/checkout", {
-      method: "POST",
-      body: JSON.stringify(body),
-    })
-
-    payment.json().then(data => {
-      if (data.paymentIntent) {
-        handleCreditCardPayment(data.paymentIntent, props.stripe).then(
-          response => {
-            if (response.error) {
-              alert(
-                "Woops, something went wrong with your credit card! Try again or contact admin@kwaly.be"
-              )
-            } else {
-              navigate("./success")
-              dispatch({ type: "CLEAR_CART", value: "" })
+      payment.json().then(data => {
+        if (data.paymentIntent) {
+          handleCreditCardPayment(data.paymentIntent, props.stripe).then(
+            response => {
+              if (response.error) {
+                alert(
+                  "Woops, something went wrong with your credit card! Try again or contact admin@kwaly.be"
+                )
+              } else {
+                navigate("./success")
+                dispatch({ type: "CLEAR_CART", value: "" })
+              }
             }
-          }
-        )
-      }
-      if (data.source) {
-        navigate(data.source.redirect.url)
-        dispatch({ type: "CLEAR_CART", value: "" })
-      }
-    })
-    setloadingText("Redirecting")
-
+          )
+        }
+        if (data.source) {
+          navigate(data.source.redirect.url)
+          dispatch({ type: "CLEAR_CART", value: "" })
+        }
+      })
+      setloadingText("Redirecting")
+    } catch (err) {
+      alert(
+        "We're having difficulties processing your payment. Sorry about that, please contact orders@kwaly.be"
+      )
+    }
     setTimeout(() => {
       setIsLoading(false)
     }, 500)
@@ -337,11 +336,26 @@ function CheckoutForm(props) {
           </div>
           <div class="md:flex md:items-center mb-6">
             <label class="block text-gray-700 font-bold">
-              <input name="terms" ref={register({ required: true })} class="mr-2 leading-tight" type="checkbox" />
-              <span class="text-sm">I've read and agree to the <a target="_blank" className="border-b-2 border-gray-500" href="/termsandconditions">Terms and conditions</a></span>
+              <input
+                name="terms"
+                ref={register({ required: true })}
+                class="mr-2 leading-tight"
+                type="checkbox"
+              />
+              <span class="text-sm">
+                I've read and agree to the{" "}
+                <a
+                  target="_blank"
+                  className="border-b-2 border-gray-500"
+                  href="/termsandconditions"
+                >
+                  Terms and conditions
+                </a>
+              </span>
               {errors.terms && errors.terms.type === "required" && (
                 <p className="text-red-500 text-xs italic">
-                  Please agree to the terms and conditions before making a purchase
+                  Please agree to the terms and conditions before making a
+                  purchase
                 </p>
               )}
             </label>
