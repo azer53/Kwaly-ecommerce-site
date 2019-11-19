@@ -15,7 +15,7 @@
 
 
  .markdown {
-  @apply text-lg text-red-900 leading-normal;
+  @apply text-lg text-gray-900 leading-normal;
   & > * + *,  & li + li, & li > p + p {
     @apply mt-6;
   }
