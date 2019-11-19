@@ -1,7 +1,6 @@
 import React from "react"
 import {  useStaticQuery, graphql } from "gatsby"
 import Img from "gatsby-image"
-import {WebpMachine} from "webp-hero"
 
 /*
  * This component is built using `gatsby-image` to automatically serve optimized
@@ -14,15 +13,12 @@ import {WebpMachine} from "webp-hero"
  * - `useStaticQuery`: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-const polyfill = ()=>{
-  const webpMachine = new WebpMachine()
-  webpMachine.polyfillDocument();
-}
+
 
 const VisaLogo = ()=> {
 const data  = useStaticQuery(graphql`
       query {
-        visaLogo: file(relativePath: { eq: "visa.webp" }) {
+        visaLogo: file(relativePath: { eq: "visa.png" }) {
           childImageSharp {
             fluid(maxWidth: 200) {
               ...GatsbyImageSharpFluid
@@ -33,7 +29,7 @@ const data  = useStaticQuery(graphql`
     `)
       return (
         <Img
-        fluid={data.visaLogo.childImageSharp.fluid} onLoad={polyfill}
+        fluid={data.visaLogo.childImageSharp.fluid} 
       />
       )
   }
