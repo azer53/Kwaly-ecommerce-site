@@ -1,6 +1,28 @@
 import React from "react"
 
 class InstaFeed extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      result: {
+        graphql: {
+          user: {
+            edge_owner_to_timeline_media: {
+              edges: [],
+            },
+          },
+        },
+      },
+    }
+  }
+  componentDidMount() {
+    fetch("https://www.instagram.com/kwaly_/?__a=1")
+      .then(res => res.json())
+      .then(data => {
+        this.setState({ result: data })
+      })
+      .catch(console.log)
+  }
   render() {
     function InstaItem(props) {
       return (
