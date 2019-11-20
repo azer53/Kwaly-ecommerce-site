@@ -1,5 +1,5 @@
 import React from "react"
-import {  useStaticQuery, graphql } from "gatsby"
+import { useStaticQuery, graphql } from "gatsby"
 import Img from "gatsby-image"
 
 /*
@@ -13,25 +13,19 @@ import Img from "gatsby-image"
  * - `useStaticQuery`: https://www.gatsbyjs.org/docs/use-static-query/
  */
 
-
-
-const VisaLogo = ()=> {
-const data  = useStaticQuery(graphql`
-      query {
-        visaLogo: file(relativePath: { eq: "visa.png" }) {
-          childImageSharp {
-            fluid(maxWidth: 200) {
-              ...GatsbyImageSharpFluid
-            }
+const VisaLogo = () => {
+  const data = useStaticQuery(graphql`
+    query {
+      visaLogo: file(relativePath: { eq: "visa.png" }) {
+        childImageSharp {
+          fluid(maxWidth: 100) {
+            ...GatsbyImageSharpFluid_withWebp
           }
         }
       }
-    `)
-      return (
-        <Img
-        fluid={data.visaLogo.childImageSharp.fluid} 
-      />
-      )
-  }
+    }
+  `)
+  return <Img fluid={data.visaLogo.childImageSharp.fluid} />
+}
 
-  export default VisaLogo
+export default VisaLogo
