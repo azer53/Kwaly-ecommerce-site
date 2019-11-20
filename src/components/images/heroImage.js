@@ -19,16 +19,19 @@ const Image = () => {
       placeholderImage: file(relativePath: { eq: "header-noblur.png" }) {
         childImageSharp {
           fluid(maxWidth: 1200) {
-            ...GatsbyImageSharpFluid
+            ...GatsbyImageSharpFluid_withWebp
           }
         }
       }
     }
   `)
 
-
-
-return <Img fluid={data.placeholderImage.childImageSharp.fluid}  placeholderClassName="w-full object-cover" />
+  return (
+    <Img
+      fluid={data.placeholderImage.childImageSharp.fluid}
+      placeholderClassName="w-full object-cover"
+    />
+  )
 }
 
 export default Image
