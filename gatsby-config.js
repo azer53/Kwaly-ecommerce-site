@@ -58,7 +58,12 @@ module.exports = {
       },
     },
     `gatsby-transformer-sharp`,
-    `gatsby-plugin-stripe`,
+    {
+      resolve: `gatsby-plugin-stripe`,
+      options: {
+        async: true,
+      },
+    },
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
