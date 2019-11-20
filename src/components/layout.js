@@ -11,6 +11,7 @@ import { useStaticQuery, graphql, Link } from "gatsby"
 import KwalyLogo from "../components/images/kwalyLogo"
 import Navigation from "./navigation"
 import Footer from "./footer"
+import "../css/style.css"
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
