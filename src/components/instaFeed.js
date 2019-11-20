@@ -1,7 +1,5 @@
 import React from "react"
 
-//import InstaItem from "./instaItem.js"
-
 class InstaFeed extends React.Component {
   render() {
     function InstaItem(props) {

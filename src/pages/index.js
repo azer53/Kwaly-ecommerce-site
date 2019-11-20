@@ -6,6 +6,7 @@ import BlackShirt from "../components/images/black-shirt.js"
 import PinkShirt from "../components/images/pink-shirt.js"
 import InstaFeed from "../components/instaFeed.js"
 import { Link } from "gatsby"
+import LazyLoad from "react-lazyload"
 
 class IndexPage extends React.Component {
   constructor(props) {
@@ -60,15 +61,16 @@ class IndexPage extends React.Component {
         </section>
         <section>
           <div className="lg:w-10/12 mx-auto">
-            <InstaFeed
-              edges={
-                this.state.result.graphql.user.edge_owner_to_timeline_media
-                  .edges
-              }
-            />
+            <LazyLoad height={200} offset={100}>
+              <InstaFeed
+                edges={
+                  this.state.result.graphql.user.edge_owner_to_timeline_media
+                    .edges
+                }
+              />
+            </LazyLoad>
           </div>
         </section>
-
       </Layout>
     )
   }
