@@ -3,7 +3,9 @@ import React from "react"
 class InstaFeed extends React.Component {
   render() {
     function InstaItem(props) {
-      return <img className="" src={props.src} alt="" loading="lazy" />
+      return (
+        <img className="" src={props.src} alt="" loading="lazy" width="320" />
+      )
     }
 
     function Row(props) {
