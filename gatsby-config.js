@@ -4,7 +4,6 @@ require("dotenv").config({
 
 var proxy = require("http-proxy-middleware")
 
-
 module.exports = {
   developMiddleware: app => {
     app.use(
@@ -35,15 +34,21 @@ module.exports = {
       resolve: "gatsby-plugin-react-svg",
       options: {
         rule: {
-          include: /images/
-        }
-      }
+          include: /images/,
+        },
+      },
     },
     {
       resolve: "gatsby-background-image",
       options: {
         // add your own characters to escape, replacing the default ':/'
         specialChars: "/:",
+      },
+    },
+    {
+      resolve: "gatsby-plugin-preconnect",
+      options: {
+        domains: ["https://www.instagram.com"],
       },
     },
     {
@@ -80,7 +85,7 @@ module.exports = {
       options: {
         tailwind: true,
         purgeOnly: [`src/css/style.css`],
-        whitelist: ['nav-bar-sticky']
+        whitelist: ["nav-bar-sticky"],
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
