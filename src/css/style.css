@@ -13,9 +13,62 @@
 
  @import url('https://fonts.googleapis.com/css?family=Karla&display=swap');
 
+
+ .markdown {
+  @apply text-lg text-gray-900 leading-normal;
+  & > * + *,  & li + li, & li > p + p {
+    @apply mt-6;
+  }
+  & strong {
+    @apply text-black font-bold;
+  }
+  & a {
+    @apply text-black font-semibold;
+  }
+  & strong a {
+    @apply font-bold;
+  }
+  & h1 {
+    @apply leading-tight text-2xl font-bold text-black mb-2 mt-10;
+  }
+  & h2 {
+    @apply leading-tight text-xl font-bold text-black mb-2 mt-10;
+  }
+  & h3 {
+    @apply leading-tight text-lg font-bold text-black mt-8 -mb-2;
+  }
+  & code {
+    @apply font-mono text-sm inline bg-gray-300 px-1;
+  }
+  & pre code {
+    @apply block bg-black p-4 rounded;
+  }
+  & blockquote {
+    @apply border-l-4 border-gray-300 pl-4 italic;
+  }
+  & ul, & ol {
+    @apply pl-5;
+    @screen sm {
+      @apply pl-10;
+    }
+  }
+  & ul {
+    @apply list-disc
+  }
+  & ol {
+    @apply list-decimal
+  }
+}
+
+.nav-bar-sticky {
+  @apply sticky;
+  top: 0;
+  width: 100%;
+}
+/* goddammit */
  .instaContainer{
    position: relative;
- }
+  }
  .overlay {
   position: absolute;
   top: 0;
@@ -78,6 +131,32 @@ input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;  
 }
 
+.StripeElement {
+  height: 40px;
+  padding: 10px 12px;
+
+  color: #32325d;
+  background-color: white;
+  border: 1px solid transparent;
+  border-radius: 4px;
+
+  box-shadow: 0 1px 3px 0 #e6ebf1;
+  -webkit-transition: box-shadow 150ms ease;
+  transition: box-shadow 150ms ease;
+}
+
+input:focus,
+.StripeElement--focus {
+  box-shadow: 0 1px 3px 0 #cfd7df;
+}
+
+.StripeElement--invalid {
+  border-color: #fa755a;
+}
+
+.StripeElement--webkit-autofill {
+  background-color: #fefde5 !important;
+}
   /*.gradient {
     background: linear-gradient(90deg, #d53369 0%, #daae51 100%);
 }*/

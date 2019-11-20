@@ -10,7 +10,7 @@ import Products from "../components/contentful/products"
 const ShopPage = () => (
   <Layout>
     <SEO title="Shop" />
-    <section className="bg-white border-b py-8">
+    <section className="bg-white py-8">
 
       <div className="container mx-auto flex flex-wrap pt-4 pb-12">
 

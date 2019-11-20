@@ -20,16 +20,14 @@ class Skus extends Component {
         return (
             <StaticQuery
                 query={graphql`
-                                query allContentfulClothes {
-                                allContentfulClothes {
+                                query allContentfulProducts {
+                                    allContentfulProduct {
                                     edges {
                                     node {
                                         id
+                                        title
                                         color
-                                        gender
-                                        price
                                         slug
-                                        displayName
                                         productImages {
                                         fluid(maxWidth: 600) {
                                             ...GatsbyContentfulFluid
@@ -38,6 +36,10 @@ class Skus extends Component {
                                         clothingType {
                                             type
                                           }
+                                          variants{
+                                              price
+                                              size
+                                          }
                                     }
                                     }
                                 }
@@ -45,9 +47,9 @@ class Skus extends Component {
 
         `}
                 render={
-                    ({ allContentfulClothes }) => (
+                    ({ allContentfulProduct }) => (
                         <div className="mx-auto flex w-10/12 flex-col sm:flex-row">
-                            {allContentfulClothes.edges.map(({ node: sku }) => (
+                            {allContentfulProduct.edges.map(({ node: sku }) => (
                                 <SkuCard key={sku.id} sku={sku} stripe={this.state.stripe} />
                             ))}
                         </div>
