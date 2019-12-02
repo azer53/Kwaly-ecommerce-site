@@ -27,6 +27,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
               variants {
                 initialStockLevel
                 price
+                salePrice
                 size
               }
             }
