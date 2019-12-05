@@ -39,6 +39,7 @@ class Skus extends Component {
                                           variants{
                                               price
                                               size
+                                              salePrice
                                           }
                                     }
                                     }
@@ -48,7 +49,7 @@ class Skus extends Component {
         `}
                 render={
                     ({ allContentfulProduct }) => (
-                        <div className="mx-auto flex w-10/12 flex-col sm:flex-row">
+                        <div className="mx-auto flex w-10/12 flex-col sm:flex-row flex-wrap">
                             {allContentfulProduct.edges.map(({ node: sku }) => (
                                 <SkuCard key={sku.id} sku={sku} stripe={this.state.stripe} />
                             ))}

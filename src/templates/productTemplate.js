@@ -15,9 +15,13 @@ function ProductTemplate({ data }) {
   const [selectedPrice, setSelectedPrice] = useState(
     data.contentfulProduct.variants[0].price
   )
+  const [selectedSalePrice, setSelectedSalePrice] = useState(
+    data.contentfulProduct.variants[0].salePrice
+  )
 
-  product.selectedSize = selectedSize
-  product.price = selectedPrice
+  product.selectedSize = selectedSize;
+  product.price = selectedPrice;
+  product.salePrice = selectedSalePrice;
 
   const handleChange = event => {
     const entry = parseInt(event.target.value, 10)
@@ -32,6 +36,9 @@ function ProductTemplate({ data }) {
     setSelectedSize(event.target.value)
     setSelectedPrice(
       product.variants.find(x => x.size === event.target.value).price
+    )
+    setSelectedSalePrice(
+      product.variants.find(x => x.size === event.target.value).salePrice
     )
   }
 
@@ -54,7 +61,7 @@ function ProductTemplate({ data }) {
         slug: orderProduct.slug,
         title: orderProduct.title,
         selectedSize: selectedSize,
-        price: orderProduct.price,
+        price: selectedSalePrice ? selectedSalePrice : selectedPrice,
         orderQuantity: quantity,
       },
     })
@@ -90,7 +97,16 @@ function ProductTemplate({ data }) {
               })}
             </select>
             <div className="px-6 inline-block text-karla-uppercase">
-              € {product.price}
+              <span
+                className={`${
+                  product.salePrice ? `line-through text-gray-600` : ``
+                }`}
+              >
+                € {product.price}
+              </span>
+              <span className={`${product.salePrice ? `inline-block` : `hidden`} mx-4 font-bold`}>
+                <span className="text-green-900">€ {product.salePrice}</span>
+              </span>
             </div>
           </div>
           <div className="flex flex-row justify-start border-t-2 border-gray-200 mt-5 pt-5">
@@ -153,6 +169,7 @@ export const query = graphql`
         initialStockLevel
         size
         price
+        salePrice
       }
       productImages {
         fluid(maxWidth: 600) {

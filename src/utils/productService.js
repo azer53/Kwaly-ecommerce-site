@@ -24,7 +24,7 @@ function createSkus(variants, baseProductStripeId) {
           size: variant.size,
           name: name.toLowerCase(),
         },
-        price: variant.price * 100,
+        price: variant.salePrice ? variant.salePrice*100 : variant.price * 100,
         currency: "eur",
         inventory: { type: "finite", quantity: variant.initialStockLevel },
       },
