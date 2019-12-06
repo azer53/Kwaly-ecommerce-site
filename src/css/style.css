@@ -213,6 +213,17 @@ input:focus,
   */
 
   .product-card {
-    width: 24.25%;
-    /* width: calc(100% * (1/4) - 0.25rem); */
+    width: 98%;
+  }
+  
+  @media (min-width: 1024px) {
+    .product-card{
+      width: 24%;
+    }
+  }
+  
+  @media (min-width: 1280px) {
+    .product-card{
+      width: 24.25%;
+    }
   }
