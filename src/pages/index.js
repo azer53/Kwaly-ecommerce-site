@@ -4,34 +4,10 @@ import Hero from "../components/hero"
 import SEO from "../components/seo"
 import BlackShirt from "../components/images/black-shirt.js"
 import PinkShirt from "../components/images/pink-shirt.js"
-//import InstaFeed from "../components/instaFeed.js"
 import InstaFeed2 from "../components/instaFeed2.js"
 import { Link } from "gatsby"
 
 class IndexPage extends React.Component {
-  /*   constructor(props) {
-    super(props)
-    this.state = {
-      result: {
-        graphql: {
-          user: {
-            edge_owner_to_timeline_media: {
-              edges: [],
-            },
-          },
-        },
-      },
-    }
-  }
-  componentDidMount() {
-    fetch("https://www.instagram.com/kwaly_/?__a=1")
-      .then(res => res.json())
-      .then(data => {
-        this.setState({ result: data })
-      })
-      .catch(console.log)
-  } */
-
   render() {
     return (
       <Layout>
@@ -60,16 +36,9 @@ class IndexPage extends React.Component {
           </div>
         </section>
         <section>
-          <InstaFeed2 />
-
-          {/*           <div className="lg:w-10/12 mx-auto">
-              <InstaFeed
-                edges={
-                  this.state.result.graphql.user.edge_owner_to_timeline_media
-                    .edges
-                }
-              />
-          </div> */}
+          <div className="lg:w-10/12 mx-auto">
+            <InstaFeed2 />
+          </div>
         </section>
       </Layout>
     )

@@ -46,7 +46,7 @@ const InstaFeed2 = () => {
     <div>
       <div>
         <div className="flex justify-center">
-          {posts.length > 0 ? (
+          {hasError || posts.length > 0 ? (
             <Row edges={posts} />
           ) : (
             <span className="text-karla-uppercase">
