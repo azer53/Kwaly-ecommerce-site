@@ -38,7 +38,7 @@ class IndexPage extends React.Component {
         </section>
         <section>
           <div className="lg:w-10/12 mx-auto">
-            <LazyLoad height={200} offset={100}>
+            <LazyLoad height={200} offset={100} once>
               <InstaFeed />
             </LazyLoad>
           </div>

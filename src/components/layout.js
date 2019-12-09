@@ -34,7 +34,7 @@ const Layout = ({ children }) => {
         </a>
       </CookieConsent>
       <div id="logo" className="mx-auto w-1/6 pt-10 lg:w-1/12">
-        <Link to="/">
+        <Link to="/" title="Kwaly">
           <KwalyLogo />
         </Link>
       </div>
