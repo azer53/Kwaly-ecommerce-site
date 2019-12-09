@@ -4,7 +4,7 @@ import Hero from "../components/hero"
 import SEO from "../components/seo"
 import BlackShirt from "../components/images/black-shirt.js"
 import PinkShirt from "../components/images/pink-shirt.js"
-import InstaFeed2 from "../components/instaFeed2.js"
+import InstaFeed from "../components/instaFeed.js"
 import { Link } from "gatsby"
 
 class IndexPage extends React.Component {
@@ -37,7 +37,7 @@ class IndexPage extends React.Component {
         </section>
         <section>
           <div className="lg:w-10/12 mx-auto">
-            <InstaFeed2 />
+            <InstaFeed />
           </div>
         </section>
       </Layout>
