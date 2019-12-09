@@ -51,6 +51,7 @@ module.exports = {
         domains: [
           "https://www.instagram.com",
           "https://www.googletagmanager.com",
+          "https://instagram.fbru1-1.fna.fbcdn.net",
         ],
       },
     },
