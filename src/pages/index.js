@@ -4,13 +4,12 @@ import Hero from "../components/hero"
 import SEO from "../components/seo"
 import BlackShirt from "../components/images/black-shirt.js"
 import PinkShirt from "../components/images/pink-shirt.js"
-import InstaFeed from "../components/instaFeed.js"
+//import InstaFeed from "../components/instaFeed.js"
 import InstaFeed2 from "../components/instaFeed2.js"
 import { Link } from "gatsby"
-import LazyLoad from "react-lazyload"
 
 class IndexPage extends React.Component {
-  constructor(props) {
+  /*   constructor(props) {
     super(props)
     this.state = {
       result: {
@@ -31,7 +30,7 @@ class IndexPage extends React.Component {
         this.setState({ result: data })
       })
       .catch(console.log)
-  }
+  } */
 
   render() {
     return (
@@ -61,18 +60,16 @@ class IndexPage extends React.Component {
           </div>
         </section>
         <section>
-          {/* <InstaFeed2 /> */}
+          <InstaFeed2 />
 
-          <div className="lg:w-10/12 mx-auto">
-            <LazyLoad height={200} offset={100}>
+          {/*           <div className="lg:w-10/12 mx-auto">
               <InstaFeed
                 edges={
                   this.state.result.graphql.user.edge_owner_to_timeline_media
                     .edges
                 }
               />
-            </LazyLoad>
-          </div>
+          </div> */}
         </section>
       </Layout>
     )
