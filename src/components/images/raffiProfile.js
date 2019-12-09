@@ -18,17 +18,20 @@ const Image = () => {
     query {
       placeholderImage: file(relativePath: { eq: "raffiProfile.png" }) {
         childImageSharp {
-          fluid(maxWidth: 500) {
-            ...GatsbyImageSharpFluid
+          fluid(maxWidth: 182) {
+            ...GatsbyImageSharpFluid_withWebp
           }
         }
       }
     }
   `)
 
-
-
-return <Img fluid={data.placeholderImage.childImageSharp.fluid}  placeholderClassName="" />
+  return (
+    <Img
+      fluid={data.placeholderImage.childImageSharp.fluid}
+      placeholderClassName=""
+    />
+  )
 }
 
 export default Image

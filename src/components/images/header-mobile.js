@@ -19,16 +19,19 @@ const Image = () => {
       placeholderImage: file(relativePath: { eq: "header-mobile.jpg" }) {
         childImageSharp {
           fluid(maxWidth: 768) {
-            ...GatsbyImageSharpFluid
+            ...GatsbyImageSharpFluid_withWebp
           }
         }
       }
     }
   `)
 
-
-
-return <Img fluid={data.placeholderImage.childImageSharp.fluid}  placeholderClassName="" />
+  return (
+    <Img
+      fluid={data.placeholderImage.childImageSharp.fluid}
+      placeholderClassName=""
+    />
+  )
 }
 
 export default Image
