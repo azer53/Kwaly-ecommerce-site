@@ -66,7 +66,6 @@ module.exports = {
         domains: [
           "https://www.instagram.com",
           "https://instagram.fbru1-1.fna.fbcdn.net",
-          "https://www.googletagmanager.com/gtm.js?id=GTM-54ZXWRN",
         ],
       },
     },
