@@ -29,7 +29,7 @@ export default function Brand() {
               As surfers, skaters, snowboarders, skiers, adventurous travelers,
               we’re glad mother nature offers us the gift to enjoy these sports.
               However we’ve noticed a change in recent years, due to pollution.
-              This is Where we want to step forward and take our responsibility
+              This is where we want to step forward and take our responsibility
               to make sure we can keep on riding! Therefore, Kwaly represents
               quality endurable clothing made out of organic and recycled
               materials. We support fair trade labor and strive to produce

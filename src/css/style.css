@@ -65,7 +65,7 @@
   top: 0;
   width: 100%;
 }
-/* goddammit */
+
  .instaContainer{
    position: relative;
   }
@@ -157,6 +157,7 @@ input:focus,
 .StripeElement--webkit-autofill {
   background-color: #fefde5 !important;
 }
+
   /*.gradient {
     background: linear-gradient(90deg, #d53369 0%, #daae51 100%);
 }*/
@@ -193,6 +194,7 @@ input:focus,
   *
   * @import "tailwindcss/utilities";
   */
+
  @tailwind utilities;
  
  /**
@@ -210,3 +212,18 @@ input:focus,
   * @import "utilities/skew-transforms";
   */
 
+  .product-card {
+    width: 98%;
+  }
+  
+  @media (min-width: 1024px) {
+    .product-card{
+      width: 24%;
+    }
+  }
+  
+  @media (min-width: 1280px) {
+    .product-card{
+      width: 24.25%;
+    }
+  }

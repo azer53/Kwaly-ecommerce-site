@@ -14,30 +14,26 @@ const Image = () => {
         edges {
           node {
             childImageSharp {
-              fluid(maxWidth: 200) {
-                ...GatsbyImageSharpFluid_withWebp
+                fluid(maxWidth: 200) {
+                  ...GatsbyImageSharpFluid
+                }
               }
-            }
           }
         }
       }
     }
   `)
 
-  return (
+  return ( 
     <div className="flex flex-col sm:flex-row justify-center">
-      {data.allFile.edges.map((element, index) => {
-        return (
-          <Img
-            key={index}
-            fluid={element.node.childImageSharp.fluid}
-            placeholderClassName="w-24"
-            className="w-24 mx-auto sm:mx-8"
-          />
-        )
-      })}
-    </div>
+    {data.allFile.edges.map((element,index,arr) => {
+    return <Img key={index} fluid={element.node.childImageSharp.fluid} placeholderClassName="w-24" className="w-24 mx-auto sm:mx-8"/>
+    
+    })}
+    </div>  
   )
+  
+  
 }
 
 export default Image
