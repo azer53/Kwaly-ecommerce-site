@@ -48,7 +48,10 @@ module.exports = {
     {
       resolve: "gatsby-plugin-preconnect",
       options: {
-        domains: ["https://www.instagram.com"],
+        domains: [
+          "https://www.instagram.com",
+          "https://www.googletagmanager.com",
+        ],
       },
     },
     {
